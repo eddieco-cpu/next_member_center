@@ -1,0 +1,8 @@
+.main {
+  min-height: 50vh;
+  background-color: #ddd;
+
+  &>div {
+    outline: 3px solid #ccc;
+  }
+}
