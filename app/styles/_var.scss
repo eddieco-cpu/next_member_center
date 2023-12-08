@@ -1,0 +1,29 @@
+ //小螢幕桌機
+ @mixin desktop {
+     @media(max-width:1297px) {
+         @content;
+     }
+ }
+
+ //平板
+ @mixin tablet {
+
+
+     @media(max-width:1023px) {
+         @content;
+     }
+ }
+
+ //手機
+ @mixin mobile {
+     @media(max-width:767px) {
+         @content;
+     }
+ }
+
+ //small iphone 
+ @mixin lastMedia {
+     @media(max-width:380px) {
+         @content;
+     }
+ }
