@@ -1,0 +1,19 @@
+@import "reset.css";
+
+:root {
+  --topic_deep: #005757;
+  --green_deep: #218431;
+  --green_normal: #D9EFDB;
+  --green_normal-02: #41B751;
+  --green_light: #E8F6E9;
+  --green_lightist: #EDF6EE;
+
+  --orange_style-01: #F46C00;
+}
+
+
+html,
+body {
+  max-width: 100vw;
+  //overflow-x: hidden;
+}
