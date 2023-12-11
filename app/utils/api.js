@@ -1,16 +1,17 @@
 import axios from "axios";
 
+const axiosInstance = axios.create({
+  xsrfCookieName: "",
+  xsrfHeaderName: "",
+  withCredentials: true,
+});
+
 export function postForm(url, data) {
   //
   const formData = new URLSearchParams();
   for (let key in data) {
     formData.append(key, data[key]);
   }
-  const axiosInstance = axios.create({
-    xsrfCookieName: "",
-    xsrfHeaderName: "",
-    withCredentials: true,
-  });
 
   return axiosInstance.post(url, formData, {
     headers: {
@@ -20,7 +21,22 @@ export function postForm(url, data) {
   });
 }
 
+export function getData(
+  url,
+  option = {
+    auth: false,
+  }
+) {
+  return axiosInstance({
+    url,
+    withCredentials: option.auth,
+    method: "GET",
+  });
+}
+
 export let loginDomain = "https://health-feg.udn.com";
-//   process.env.NODE_ENV === "development"
-//     ? "http://localhost:8887"
-//     : "https://health-feg.udn.com";
+// process.env.NODE_ENV === "development"
+//   ? "http://localhost:8887"
+//   : "https://health-feg.udn.com";
+
+export const FOOTER = loginDomain + "/api/member/component";

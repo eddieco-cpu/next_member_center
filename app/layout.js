@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import "./styles/globals.scss";
 
 export const metadata = {
@@ -16,10 +17,12 @@ export default function RootLayout({ children }) {
           rel="icon"
           href="https://health.udn.com/images/favicon.ico"
         ></link>
+        <link rel="stylesheet" href="/health/css/output_style.css"></link>
       </head>
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
