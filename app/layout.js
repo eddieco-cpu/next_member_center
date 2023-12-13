@@ -17,6 +17,16 @@ export default function RootLayout({ children }) {
           rel="icon"
           href="https://health.udn.com/images/favicon.ico"
         ></link>
+        <link
+          href="https://s.udn.com.tw/static/font-icons/css/fontello.css"
+          rel="stylesheet"
+          type="text/css"
+        ></link>
+        <link
+          href="https://s.udn.com.tw/static/font-icons/css/animation.css"
+          rel="stylesheet"
+          type="text/css"
+        />
         <link rel="stylesheet" href="/health/css/output_style.css"></link>
       </head>
       <body>

@@ -1,29 +1,13 @@
- //小螢幕桌機
- @mixin desktop {
-     @media(max-width:1297px) {
-         @content;
-     }
- }
+$white: #ffffff;
+$black: #000000;
+$grey-0: #EEEEEE;
+$grey-100: #C0BFBD;
+$grey-200: #7B7B7B;
 
- //平板
- @mixin tablet {
+$green-0: #EDF6EE;
+$green-100: #D9EFDB;
+$green-200: #218431;
 
+$light-green: #41B751;
 
-     @media(max-width:1023px) {
-         @content;
-     }
- }
-
- //手機
- @mixin mobile {
-     @media(max-width:767px) {
-         @content;
-     }
- }
-
- //small iphone 
- @mixin lastMedia {
-     @media(max-width:380px) {
-         @content;
-     }
- }
+$orange: #F46C00;

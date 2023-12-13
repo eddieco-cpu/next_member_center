@@ -10,6 +10,10 @@ const nextConfig = {
         source: "/health/api/:path*", // 捕捉所有以 /health/api 開頭的請求
         destination: "https://health.udn.com/api/:path*", // 將這些請求重定向到這個目標地址
       },
+      {
+        source: "/udn/api/:path*", // 捕捉所有以 /health/api 開頭的請求
+        destination: "https://udn.com/api/:path*", // 將這些請求重定向到這個目標地址
+      },
     ];
   },
 };
