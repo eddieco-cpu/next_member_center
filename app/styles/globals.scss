@@ -72,9 +72,11 @@ a {
   }
 }
 
-.search-menu {
+.header .search-menu {
   .overlay-menu {
     height: 100vh;
+    top: -100vh;
+    transition: all .4s ease-in;
   }
 }
 

@@ -1,8 +1,6 @@
 import Image from "next/image";
 
-import PageTitle from "../components/ui/PageTitle";
-
-import styles from "./page.module.scss";
+import PageTitle from "@components/ui/PageTitle";
 
 export default function Home() {
   return (

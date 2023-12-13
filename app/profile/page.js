@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import PageTitle from "../components/ui/PageTitle";
+import PageTitle from "@components/ui/PageTitle";
 
 export default function Profile() {
   return (

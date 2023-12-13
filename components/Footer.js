@@ -1,4 +1,4 @@
-import { getData, FOOTER } from "../utils/api";
+import { getData, FOOTER } from "@utils/api";
 
 export default async function Footer() {
   let data = null;

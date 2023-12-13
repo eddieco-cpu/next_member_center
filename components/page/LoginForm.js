@@ -4,7 +4,7 @@ import axios from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState, useMemo } from "react";
 
-import { loginDomain, postForm } from "../../utils/api.js";
+import { loginDomain, postForm } from "@utils/api.js";
 
 function LoginForm() {
   //

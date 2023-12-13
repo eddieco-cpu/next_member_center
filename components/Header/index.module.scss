@@ -1,6 +1,6 @@
 //@import "../../styles/globals";
-@import "../../styles/_mixin";
-@import "../../styles/_var";
+@import "@styles/_mixin";
+@import "@styles/_var";
 
 .header {
   border-bottom: 1px solid var(--grey-100);

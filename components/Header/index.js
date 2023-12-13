@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import classes from "./index.module.scss";
 
 import HeaderNav from "./HeaderNav";
-import Menu from "./Menu";
+import Menu from "./Menu.js";
 import OverLayMenu from "./OverLayMenu";
+import HeaderProvider from "@contexts/headerContext";
 
-import GlobalProvider from "../../contexts/global";
+import classes from "./index.module.scss";
 
 export default function Header() {
   return (
-    <header className={classes.header}>
-      <GlobalProvider>
+    <header className={"header " + classes.header}>
+      <HeaderProvider>
         <section className={classes.header__wrapper}>
           <div className={classes.logo}>
             <a href="https://udn.com" className={classes["logo-udn"]}>
@@ -37,7 +37,7 @@ export default function Header() {
         <section className="search-menu">
           <OverLayMenu></OverLayMenu>
         </section>
-      </GlobalProvider>
+      </HeaderProvider>
     </header>
   );
 }

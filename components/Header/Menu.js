@@ -1,33 +1,15 @@
 "use client";
 
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from "react";
+import React, { useContext } from "react";
 
-import { GlobalContext } from "../../contexts/global";
+import { HeaderContext } from "@contexts/headerContext";
 import classes from "./index.module.scss";
 
-export default function Menu(props) {
+export default function Menu() {
   //
-  const { test, setTest, switchOverLayMenu, setSwitchOverLayMenu } =
-    useContext(GlobalContext);
+  const { setSwitchOverLayMenu } = useContext(HeaderContext);
 
   //
-  useEffect(() => {
-    console.log("test", test);
-    console.log("switchOverLayMenu", switchOverLayMenu);
-  }, [test]);
-
-  //
-  const tested = () => {
-    setSwitchOverLayMenu(true);
-    console.log("switchOverLayMenu", switchOverLayMenu);
-  };
-
   return (
     <section className={classes.menu}>
       <div className={classes.member__container}>
@@ -42,7 +24,7 @@ export default function Menu(props) {
 
       <i
         className={classes["nav-menu"] + " i-list-search"}
-        onClick={tested}
+        onClick={() => setSwitchOverLayMenu(true)}
       ></i>
 
       <div className={classes["notification__container"]}>
