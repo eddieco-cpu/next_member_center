@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import PageTitle from "@components/ui/PageTitle";
-import LoginForm from "@components/page/LoginForm";
+import LoginForm from "@/components/pages/LoginForm2";
 
 import styles from "./page.module.scss";
 
