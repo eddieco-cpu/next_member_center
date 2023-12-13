@@ -1,6 +1,7 @@
 import Link from "next/link";
 import classes from "./index.module.scss";
 
+const regex = /^##/; // 正則表達式檢查  是否以特定符號開頭（在這裡是 '##'）
 const headerNav = [
   {
     link: "/user",
@@ -35,15 +36,15 @@ const headerNav = [
     ],
   },
   {
-    link: "",
+    link: "/collection/1",
     title: "我的最愛",
     items: [
       {
-        link: "/collection",
+        link: "",
         title: "我的收藏",
       },
       {
-        link: "/track",
+        link: "##/track",
         title: "專家追蹤",
       },
     ],
@@ -64,21 +65,29 @@ export default function HeaderNav() {
   return (
     <ul className={classes.nav + " " + classes.nav__container}>
       {headerNav.map((nav, index) => (
-        <li key={index} className={classes.nav__link__wrapper}>
+        <li
+          key={index}
+          className={classes.nav__link__wrapper + " " + classes.trigger}
+        >
           <Link href={nav.link} className={classes.nav__link}>
             {nav.title}
           </Link>
-          {/* {nav.items.length > 0 && (
-                <ul className="nav__link__wrapper__sub">
-                  {nav.items.map((item, index) => {
-                    <li>
-                      <Link href={item.link}>
-                        <a>{item.title}</a>
-                      </Link>
-                    </li>;
-                  })}
-                </ul>
-              )} */}
+
+          {nav.items.length > 0 && (
+            <nav className={classes.nav__sublink__wrapper}>
+              {nav.items.map(({ link, title }, index) => (
+                <Link
+                  key={index}
+                  href={
+                    regex.test(link) ? link.replace(regex, "") : nav.link + link
+                  }
+                  className={classes.nav__sublink}
+                >
+                  {title}
+                </Link>
+              ))}
+            </nav>
+          )}
         </li>
       ))}
     </ul>

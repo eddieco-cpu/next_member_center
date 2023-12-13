@@ -164,7 +164,12 @@
           }
         }
 
-        &.trigger:hover>div {
+        // &.trigger:hover>div {
+        //   opacity: 1;
+        //   pointer-events: all;
+        // }
+
+        &:hover>nav {
           opacity: 1;
           pointer-events: all;
         }
@@ -194,6 +199,10 @@
 
     &__sublink {
       margin-bottom: 15px;
+
+      &:first-of-type {
+        margin-top: 6px;
+      }
 
       &:last-of-type {
         margin-bottom: 0;

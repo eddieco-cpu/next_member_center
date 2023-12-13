@@ -19,12 +19,15 @@ export default async function Footer() {
   }
 
   return (
-    <div>
+    <>
       {data ? (
-        <div dangerouslySetInnerHTML={{ __html: data.footer }} />
+        <div
+          dangerouslySetInnerHTML={{ __html: data.footer }}
+          className="footer_wrapper"
+        />
       ) : (
-        <div>no data</div>
+        <div className="footer_wrapper">no data</div>
       )}
-    </div>
+    </>
   );
 }

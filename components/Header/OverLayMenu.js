@@ -67,18 +67,16 @@ const OverLayMenu = () => {
   }, [switchOverLayMenu]);
 
   return (
-    <div>
+    <div
+      className={
+        (switchOverLayMenu ? "search-menu--block" : "") +
+        " overlay-menu search-menu--none"
+      }
+    >
       <div
-        className={
-          (switchOverLayMenu ? "search-menu--block" : "") +
-          " overlay-menu search-menu--none"
-        }
-      >
-        <div
-          className="channel__container"
-          dangerouslySetInnerHTML={{ __html: overLayHTML }}
-        ></div>
-      </div>
+        className="channel__container"
+        dangerouslySetInnerHTML={{ __html: overLayHTML }}
+      ></div>
     </div>
   );
 };

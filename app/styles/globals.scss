@@ -47,11 +47,15 @@ body {
 
 * {
   font-family: 'noto sans TC';
+  line-height: 1.2;
+  letter-spacing: 1px;
 }
 
 a {
   text-decoration: none;
-  color: var(--black);
+  color: inherit;
+  transition: color 0.25s ease 0s;
+  line-height: 1.2;
   font-family: 'noto sans TC';
 }
 
@@ -86,14 +90,15 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: bold;
-  padding: 20px;
+  padding: 10px 15px;
   background-color: gray;
   color: #ccc;
   border-radius: 5px;
 
   position: fixed;
+  z-index: 10;
   bottom: 15px;
   left: 15px;
 }
