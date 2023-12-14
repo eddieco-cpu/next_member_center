@@ -4,7 +4,7 @@ import { useRef, useState, useMemo } from "react";
 
 import { loginDomain, postForm } from "@utils/api.js";
 
-import { getRecaptcha } from "../ReCaptcha";
+import { getRecaptcha } from "@components/ReCaptcha";
 
 function LoginForm() {
   //
@@ -13,7 +13,8 @@ function LoginForm() {
     console.log(token);
   }
 
-  async function emailLogin() {
+  async function emailLogin({ email, password }) {
+    //
     let gToken = await getRecaptcha();
     console.log(gToken);
 
@@ -21,8 +22,8 @@ function LoginForm() {
 
     const formData = {
       site: "health",
-      email: "dodowu@naver.com",
-      password: "1234dodo",
+      email,
+      password,
       g_token: gToken,
     };
 
@@ -37,20 +38,35 @@ function LoginForm() {
     }
   }
 
+  async function onEmailLogin(e) {
+    e.preventDefault();
+
+    const {
+      email: { value: email },
+      password: { value: password },
+    } = e.target;
+
+    console.log(email, password);
+
+    if (!email || !password) return console.log("empty email or password");
+
+    emailLogin({ email, password });
+  }
+
   return (
     <div>
       <button onClick={testRecaptcha}>test recaptcha</button>
-      <div className="login_form">
+      <form className="login_form" onSubmit={onEmailLogin}>
         <br />
-        信箱: <input type="email" />
-        <br />
-        <br />
-        密碼: <input type="password" />
+        信箱: <input type="email" name="email" />
         <br />
         <br />
-        {/* <input type="submit" value="email login" /> */}
-        <button onClick={emailLogin}>email login</button>
-      </div>
+        密碼: <input type="password" name="password" />
+        <br />
+        <br />
+        <input type="submit" value="email login" />
+        {/* <button onClick={emailLogin}>email login</button> */}
+      </form>
       <br />
       <input type="button" value="google login" />
       <br />
