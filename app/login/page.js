@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <main className="page_body">
       <PageTitle>Login</PageTitle>
-      <section className={styles.main}>
+      <section className={"page_body_container"}>
         <LoginForm />
       </section>
     </main>

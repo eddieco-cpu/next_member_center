@@ -4,6 +4,7 @@
 
 .header {
   border-bottom: 1px solid var(--grey-100);
+  background-color: #fff;
 
   @include pad {
     border-bottom: 0;
@@ -51,13 +52,16 @@
 
       img {
         width: 41px;
+        height: auto;
 
         @include pad {
           width: 34px;
+          height: auto;
         }
 
         @include mobile {
           width: 27px;
+          height: auto;
         }
       }
     }
@@ -65,13 +69,16 @@
     &-health {
       img {
         width: 89px;
+        height: auto;
 
         @include pad {
           width: 74px;
+          height: auto;
         }
 
         @include mobile {
           width: 59px;
+          height: auto;
         }
       }
     }
@@ -85,23 +92,23 @@
     margin-top: 10px;
     white-space: nowrap;
     display: flex;
-  }
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-  @include pad {
-    order: 3;
-    padding-right: 0;
-    margin: 0 -5vw;
-    padding: 5px 0 0 5vw;
-    width: 100vw;
-    margin-top: 0px;
-    border-top: 1px solid var(--grey-100);
-    flex-direction: column;
-    background-color: var(--grey-0);
-    min-height: 40px;
+    @include pad {
+      order: 3;
+      padding-right: 0;
+      margin: 0 -5vw;
+      padding: 5px 0 0 5vw;
+      width: 100vw;
+      margin-top: 0px;
+      border-top: 1px solid var(--grey-100);
+      // flex-direction: column;
+      background-color: var(--grey-0);
+      min-height: 40px;
+    }
   }
 
   .nav {
@@ -188,7 +195,13 @@
 
         @include pad {
           overflow-x: auto;
-          margin-right: 5% !important;
+          //margin-right: 5% !important;
+
+          margin-top: 3px;
+
+          &:not(:last-of-type) {
+            margin-right: 15px;
+          }
 
           &::-webkit-scrollbar {
             display: none;

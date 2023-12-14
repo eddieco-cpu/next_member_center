@@ -5,6 +5,7 @@ import PageTitle from "@components/ui/PageTitle";
 export default function Home() {
   return (
     <main className={"page_body"}>
+      <section className={"page_body_container"}></section>
       <PageTitle>Home</PageTitle>
     </main>
   );

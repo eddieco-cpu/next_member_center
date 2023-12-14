@@ -65,10 +65,7 @@ export default function HeaderNav() {
   return (
     <ul className={classes.nav + " " + classes.nav__container}>
       {headerNav.map((nav, index) => (
-        <li
-          key={index}
-          className={classes.nav__link__wrapper + " " + classes.trigger}
-        >
+        <li key={index} className={classes.nav__link__wrapper + " "}>
           <Link href={nav.link} className={classes.nav__link}>
             {nav.title}
           </Link>
