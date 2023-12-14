@@ -50,7 +50,7 @@ const OverLayMenu = () => {
         "http://localhost:3006/udn/api/line3?channelId=1005"
       );
       const data = await res.json();
-      console.log(data);
+      //console.log(data);
       setOverLayHTML(data.html);
     }
 
