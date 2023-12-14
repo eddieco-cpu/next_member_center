@@ -8,6 +8,12 @@ import classes from "./index.module.scss";
 export default function Menu() {
   //
   const { setSwitchOverLayMenu } = useContext(HeaderContext);
+  const test = () => {
+    HealthModal.alert({
+      title: "", //data.status
+      text: "test",
+    });
+  };
 
   //
   return (
@@ -28,7 +34,7 @@ export default function Menu() {
       ></i>
 
       <div className={classes["notification__container"]}>
-        <i className="i-notification"></i>
+        <i className="i-notification" onClick={test}></i>
       </div>
     </section>
   );

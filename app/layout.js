@@ -29,12 +29,14 @@ export default function RootLayout({ children }) {
           type="text/css"
         />
         <link rel="stylesheet" href="/health/css/output_style.css"></link>
+        <link rel="stylesheet" href="/health/css/health-modal.css"></link>
       </head>
       <body>
         <Header />
         {children}
         <Footer />
         <ReCaptcha />
+        <script src="/health/js/health-modal.js"></script>
       </body>
     </html>
   );
