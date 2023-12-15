@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import PageTitle from "@components/ui/PageTitle";
+import PageDevName from "@components/ui/PageDevName";
 import Form from "./components/Form";
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
       <section className={"page_body_container"}>
         <Form />
       </section>
-      <PageTitle>user / profile</PageTitle>
+      <PageDevName>user / profile</PageDevName>
     </main>
   );
 }

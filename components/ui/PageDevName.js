@@ -1,3 +1,3 @@
-export default function PageTitle({ children, className }) {
+export default function PageDevName({ children, className }) {
   return <p className={"page_title " + (className || "")}>{children}</p>;
 }

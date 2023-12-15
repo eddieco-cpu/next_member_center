@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-import PageTitle from "@components/ui/PageTitle";
+import PageDevName from "@components/ui/PageDevName";
 
 export default function Page({ params: { pageId } }) {
   return (
     <main className="page_body">
       <section className={"page_body_container"}></section>
-      <PageTitle>collection / {pageId}</PageTitle>
+      <PageDevName>collection / {pageId}</PageDevName>
     </main>
   );
 }
