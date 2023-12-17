@@ -10,6 +10,7 @@ export default function Login() {
   return (
     <main className="page_body">
       <Container className={` small`}>
+        <LoginForm></LoginForm>
       </Container>
       <PageDevName>Login</PageDevName>
     </main>

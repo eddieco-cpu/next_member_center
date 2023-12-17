@@ -12,7 +12,24 @@ export const Container = ({ children, className }) => {
   )
 };
 
-
 export const PageTitle = ({ children, className }) => (
   <h1 className={classes.page_title + ` ${(className || "")}`}>{children}</h1>
+);
+
+export const CheckboxInput = ({ children, className}) => (
+  <div className={classes.checkbox_input + ` ${(className || "")}`}>
+    {children}
+  </div>
+);
+
+export const TextInput = ({ children, className }) => (
+  <div className={classes.text_input + ` ${(className || "")}`}>
+    {children}
+  </div>
+);
+
+export const Btn = ({ children, className }) => (
+  <button className={classes.btn + ` ${(className || "")}`}>
+    {children}
+  </button>
 );

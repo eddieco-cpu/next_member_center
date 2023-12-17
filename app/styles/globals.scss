@@ -66,6 +66,12 @@ a {
   font-family: 'noto sans TC';
 }
 
+button {
+  border: none;
+  appearance: none;
+  cursor: pointer;
+}
+
 .header .search-menu {
   .overlay-menu {
     height: 100vh;
