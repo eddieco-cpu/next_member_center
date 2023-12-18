@@ -8,13 +8,69 @@ import classes from "../page.module.scss";
 import { Btn, CheckboxInput, TextInput } from "@components/ui/Layout";
 import Form3rdParty from "./Form3rdParty";
 
+import { loginDomain, postForm } from "@utils/api";
+import { getRecaptcha } from "@components/ReCaptcha";
+import { emailValidator, mobileNumberValidator } from "@utils/validator";
+
 export default function FormLogin() {
   //
   const [rememberAcc, setRememberAcc] = useState(false);
   const [pw, setPw] = useState("");
   const [acc, setAcc] = useState("");
 
-  //return "FormLogin";
+  //
+  async function handleLogin() {
+    //
+    const handler = {
+      validator: null,
+      address: "",
+    };
+
+    switch (true) {
+      case mobileNumberValidator(acc):
+        handler.validator = "mobile";
+        handler.address = "/do/member/wbs/MemberMobileLogin";
+        break;
+      case emailValidator(acc):
+        handler.validator = "email";
+        handler.address = "/do/member/wbs/MemberEmailLogin";
+        break;
+      default:
+        HealthModal.alert({
+          title: "格式錯誤",
+          text: "請輸入正確電子信箱或台灣手機號碼格式",
+        });
+        return;
+    }
+
+    console.log("handler: ", handler);
+
+    let gToken = await getRecaptcha();
+    if (!gToken) {
+      HealthModal.alert({
+        title: "Error",
+        text: "Google 驗證錯誤",
+      });
+      return;
+    }
+
+    const formData = {
+      site: "health",
+      password: pw,
+      [handler.validator]: acc,
+      g_token: gToken,
+    };
+
+    try {
+      const { data } = await postForm(
+        loginDomain + handler.address, //- /do
+        formData
+      );
+      console.log("login data: ", data); //to be continued
+    } catch (error) {
+      console.error("login error: ", error);
+    }
+  }
 
   return (
     <>
@@ -54,7 +110,9 @@ export default function FormLogin() {
         </div>
       </div>
       <div className={classes.login__button__wrapper}>
-        <Btn className={classes.login__button}>登入</Btn>
+        <Btn className={classes.login__button} onClick={handleLogin}>
+          登入
+        </Btn>
         <Form3rdParty />
       </div>
       <div className={classes.login__note}>
