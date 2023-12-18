@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+className 改寫：
+
+```js
+// 幫我將 className 的 value 從原本的 "login__tab login__tab--left" 換成 {`${classes.login__tab} ${classes["login__tab--left"]} `} 這種型式
+```

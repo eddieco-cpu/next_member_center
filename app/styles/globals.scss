@@ -53,9 +53,10 @@ body {
 }
 
 * {
-  font-family: 'noto sans TC';
+  font-family: 'noto sans TC', Arial, Helvetica, sans-serif;
   line-height: 1.2;
   letter-spacing: 1px;
+  box-sizing: border-box;
 }
 
 a {
@@ -96,4 +97,21 @@ button {
   //bottom: 15px;
   top: 100px;
   left: 15px;
+}
+
+.qa-btn {
+  margin: 40px auto;
+  width: 90%;
+  max-width: 500px;
+  display: block;
+
+  @include mobile {
+    margin-bottom: 90px;
+  }
+
+  .qa-link {
+    display: block;
+    width: 100%;
+    line-height: 45px;
+  }
 }

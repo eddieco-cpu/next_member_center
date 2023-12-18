@@ -6,6 +6,7 @@
   padding-left: 10px;
   border-left: 5px solid var(--green-200);
   margin-bottom: 10px;
+
   span {
     font-size: 15px;
     line-height: 15px;
@@ -51,14 +52,17 @@
   &:hover label {
     color: var(--green-200);
   }
+
   input[type='checkbox'] {
     display: none;
-    &:checked ~ label {
+
+    &:checked~label {
       &::after {
         opacity: 1;
       }
     }
   }
+
   label {
     position: relative;
     display: flex;
@@ -69,15 +73,19 @@
     flex-wrap: wrap;
     color: var(--grey-200);
     align-self: start;
+
     a span {
       display: inline-block;
     }
+
     a {
       text-decoration: underline;
     }
+
     .space {
       padding: 0 0.2em;
     }
+
     &::before {
       content: '';
       border-radius: 3px;
@@ -87,6 +95,7 @@
       height: 16px;
       border: 1px solid var(--grey-200);
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -136,7 +145,7 @@
         color: rgba(0, 0, 0, 0);
       }
 
-      & + * {
+      &+* {
         font-size: 18px;
         left: 10px;
         opacity: 0.7;
@@ -167,6 +176,7 @@
   border-radius: 3px;
   font-size: 18px;
   position: relative;
+
   img {
     width: 24px;
     position: absolute;
@@ -174,9 +184,12 @@
     left: 10px;
     transform: translate(0, -50%);
   }
+
   transition: background-color 0.25s ease;
   background-color: var(--green-200);
   color: var(--white);
+  line-height: 1;
+
   &:hover {
     background-color: darken($color: $green-200, $amount: 5);
   }
