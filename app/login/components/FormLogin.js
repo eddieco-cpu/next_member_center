@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "next/link";
+import Link from "next/link";
 
 import { useState } from "react";
 import classes from "../page.module.scss";
@@ -49,8 +49,8 @@ export default function FormLogin() {
           <label htmlFor="rememberAccount">記住我的帳號</label>
         </CheckboxInput>
         <div className={classes["login__setting--right"]}>
-          {/* <Link to="/forgot">忘記密碼</Link>
-          <Link to="/verify?type=resend">重寄啟用信</Link> */}
+          <Link href="/order">忘記密碼</Link>
+          <Link href="/orders">重寄啟用信</Link>
         </div>
       </div>
       <div className={classes.login__button__wrapper}>
