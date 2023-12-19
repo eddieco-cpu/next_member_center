@@ -20,3 +20,7 @@ export default async function Page() {
     </main>
   );
 }
+/**
+ * 官網文件
+ * https://nextjs.org/docs/app/api-reference/functions/cookies
+ */

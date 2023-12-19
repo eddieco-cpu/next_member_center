@@ -18,3 +18,8 @@ export default async function Page() {
     </main>
   );
 }
+
+/**
+ * 官網文件
+ * https://nextjs.org/docs/app/building-your-application/routing/route-handlers
+ */
