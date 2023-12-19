@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import classes from "../page.module.scss";
@@ -17,6 +18,8 @@ export default function FormLogin() {
   const [rememberAcc, setRememberAcc] = useState(false);
   const [pw, setPw] = useState("");
   const [acc, setAcc] = useState("");
+
+  const router = useRouter();
 
   //
   async function handleLogin() {
@@ -61,15 +64,88 @@ export default function FormLogin() {
       g_token: gToken,
     };
 
+    let data = null;
     try {
-      const { data } = await postForm(
+      const { data: feedbackData } = await postForm(
         loginDomain + handler.address, //- /do
         formData
       );
-      console.log("login data: ", data); //to be continued
+      console.log("login data: ", feedbackData);
+      data = feedbackData;
     } catch (error) {
       console.error("login error: ", error);
     }
+
+    if (!data) {
+      HealthModal.alert({
+        title: "Error",
+        text: "Network error 網際網路錯誤",
+      });
+    }
+
+    if (data.status !== "200") {
+      if (data.status === "L14") {
+        // account not activated,  redirect back to sms confirmation page
+        //
+        HealthModal.alert({
+          title: data.status,
+          text: data.message,
+          callback: async () => {
+            const gToken = await getRecaptcha();
+            let resendFormData = {
+              mobile: formData.mobile,
+              site: "health",
+              g_token: gToken,
+            };
+
+            const { data: resendData } = await postForm(
+              "/do/member/wbs/MemberMobileSendConfirm", //PHONE_CodeResend,
+              resendFormData
+            );
+
+            if (resendData.status !== "200") {
+              HealthModal.alert({
+                title: "錯誤",
+                text: resendData.message,
+              });
+              return; //setIsLoading(false)
+            }
+
+            // let newVerifyData = {      //// Verify again
+            //   mobile: formData.mobile
+            // }
+            // setVerifyData((preVerifyData) => ({
+            //   ...preVerifyData,
+            //   ...newVerifyData
+            // }))
+
+            // const searchPara = { ...parse(search), type: 'sms' }
+            // navigate({
+            //   pathname: '/verify',
+            //   search: `?${stringify(searchPara)}`
+            // })
+          },
+        });
+        return; //setIsLoading(false);
+      }
+
+      let errorData = {
+        L04: "該EMAIL尚未註冊過",
+        L07: "該手機號碼尚未註冊過",
+      };
+
+      HealthModal.alert({
+        title: data.status,
+        text: errorData[data.status] ?? data.message,
+      });
+      return; //setIsLoading(false);
+    }
+
+    //處理 teachify 邏輯
+    //return proceedToLoginWithTeachify(data)   //to be continued
+
+    //先以 跳轉 profile 頁面替代
+    router.push("/user/profile");
   }
 
   return (
