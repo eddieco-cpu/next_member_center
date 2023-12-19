@@ -21,12 +21,7 @@ export function postForm(url, data) {
   });
 }
 
-export function getData(
-  url,
-  option = {
-    auth: false,
-  }
-) {
+export function getData(url, option = { auth: true }) {
   return axiosInstance({
     url,
     withCredentials: option.auth,
@@ -34,7 +29,7 @@ export function getData(
   });
 }
 
-export let loginDomain = "https://health-feg.udn.com";
+export let loginDomain = "http://localhost:8887"; //"https://health-feg.udn.com";
 // process.env.NODE_ENV === "development"
 //   ? "http://localhost:8887"
 //   : "https://health-feg.udn.com";
