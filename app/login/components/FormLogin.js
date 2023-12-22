@@ -9,7 +9,7 @@ import classes from "../page.module.scss";
 import { Btn, CheckboxInput, TextInput } from "@components/ui/Layout";
 import Form3rdParty from "./Form3rdParty";
 
-import { loginDomain, postForm } from "@utils/api";
+import { postForm } from "@utils/api";
 import { getRecaptcha } from "@components/ReCaptcha";
 import { emailValidator, mobileNumberValidator } from "@utils/validator";
 
@@ -67,7 +67,7 @@ export default function FormLogin() {
     let data = null;
     try {
       const { data: feedbackData } = await postForm(
-        loginDomain + handler.address, //- /do
+        handler.address, //交給 proxy 處理 CORS
         formData
       );
       console.log("login data: ", feedbackData);

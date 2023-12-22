@@ -29,7 +29,7 @@ export function getData(url, option = { auth: true }) {
   });
 }
 
-export let loginDomain = "http://localhost:8887"; //"https://health-feg.udn.com";
+export let loginDomain = "https://health-feg.udn.com";
 // process.env.NODE_ENV === "development"
 //   ? "http://localhost:8887"
 //   : "https://health-feg.udn.com";

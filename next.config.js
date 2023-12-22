@@ -18,6 +18,10 @@ const nextConfig = {
         source: "/udn/api/:path*",
         destination: "https://udn.com/api/:path*",
       },
+      {
+        source: "/do/:path*",
+        destination: "https://health-feg.udn.com/do/:path*", //雖然 feg 可以接收，但是為了被種植的 cookie domain ，還是要設 proxy
+      },
     ];
   },
 };

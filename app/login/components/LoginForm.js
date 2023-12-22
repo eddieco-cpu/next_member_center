@@ -1,8 +1,9 @@
 "use client";
+// 測試 api 用的組件，現在沒用到
 
 import { useRef, useState, useMemo } from "react";
 
-import { loginDomain, postForm } from "@utils/api.js";
+import { postForm } from "@utils/api.js";
 
 import { getRecaptcha } from "@components/ReCaptcha";
 
@@ -29,7 +30,7 @@ function LoginForm() {
 
     try {
       const { data } = await postForm(
-        loginDomain + "/do/member/wbs/MemberEmailLogin", //- /do
+        "/do/member/wbs/MemberEmailLogin", //交給 proxy 處理 CORS
         formData
       );
       console.log("login data: ", data);
