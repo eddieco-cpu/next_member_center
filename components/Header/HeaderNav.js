@@ -1,5 +1,6 @@
 import Link from "next/link";
 import classes from "./index.module.scss";
+import HeaderNavItem from "./HeaderNavItem";
 
 const regex = /^##/; // 正則表達式檢查  是否以特定符號開頭（在這裡是 '##'）
 const headerNav = [
@@ -66,22 +67,35 @@ export default function HeaderNav() {
     <ul className={classes.nav + " " + classes.nav__container}>
       {headerNav.map((nav, index) => (
         <li key={index} className={classes.nav__link__wrapper + " "}>
-          <Link href={nav.link} className={classes.nav__link}>
+          <HeaderNavItem
+            href={nav.link}
+            className={classes.nav__link}
+            classNameActiveDep={nav.link}
+            ActiveExactMatch={false}
+          >
             {nav.title}
-          </Link>
+          </HeaderNavItem>
 
           {nav.items.length > 0 && (
             <nav className={classes.nav__sublink__wrapper}>
-              {nav.items.map(({ link, title }, index) => (
-                <Link
+              {nav.items.map(({ link: secLink, title: secTitle }, index) => (
+                <HeaderNavItem
                   key={index}
                   href={
-                    regex.test(link) ? link.replace(regex, "") : nav.link + link
+                    regex.test(secLink)
+                      ? secLink.replace(regex, "")
+                      : nav.link + secLink
                   }
                   className={classes.nav__sublink}
+                  classNameActiveDep={
+                    regex.test(secLink)
+                      ? secLink.replace(regex, "")
+                      : nav.link + secLink
+                  }
+                  ActiveExactMatch={true}
                 >
-                  {title}
-                </Link>
+                  {secTitle}
+                </HeaderNavItem>
               ))}
             </nav>
           )}

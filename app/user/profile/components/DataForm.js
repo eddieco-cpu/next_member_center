@@ -35,6 +35,7 @@ async function queryMemberData() {
   const udnmember = cookies.get("udnmember");
   if (!udnmember) return alert("no udnmember");
 
+  //沒用到 recaptcha，換成 server component 呼叫
   let gToken = await getRecaptcha();
   if (!gToken) return alert("recaptcha failed");
 
