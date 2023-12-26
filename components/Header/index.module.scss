@@ -102,184 +102,210 @@
       padding-right: 0;
       margin: 0 -5vw;
       padding: 5px 0 0 5vw;
+      padding: 5px 5vw 0 5vw;
       width: 100vw;
       margin-top: 0px;
       border-top: 1px solid var(--grey-100);
       // flex-direction: column;
       background-color: var(--grey-0);
       min-height: 40px;
+
+      overflow-x: auto;
     }
   }
 
-  .nav {
-    &__link {
-      font-size: 20px;
-      padding-bottom: 10px;
 
-      &::after {
-        content: '';
-        width: 0%;
-        height: 1px;
-        background-color: var(--green-200);
-        transition: width 0.25s ease;
-        display: block;
-        position: absolute;
-        bottom: -10px;
-        left: 0;
+  &__link {
+    font-size: 20px;
+    padding-bottom: 10px;
+
+    &::after {
+      content: '';
+      width: 0%;
+      height: 1px;
+      background-color: var(--green-200);
+      transition: width 0.25s ease;
+      display: block;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+
+      @include pad {
+        background-color: transparent;
+      }
+    }
+
+    &.active {
+      @include pad {
+        color: var(--green-200);
       }
 
-      &.active {
+      &::after {
+        width: 100%;
+
         @include pad {
-          color: var(--green-200);
+          bottom: 2px;
         }
 
-        &::after {
-          width: 100%;
+        @include mobile {
+          display: none;
+        }
+      }
+    }
 
-          @include pad {
-            bottom: 2px;
-          }
+    @include pad {
+      font-size: 18px;
+      padding: 5px 0;
+      position: relative;
 
-          @include mobile {
-            display: none;
+      &:not(:last-of-type) {
+        margin-right: 15px;
+      }
+    }
+
+    @include mobile {
+      font-size: 16px;
+    }
+
+    &__wrapper {
+      position: relative;
+      flex-shrink: 0;
+
+      &:not(:last-of-type) {
+        margin-right: 35px;
+
+        @include desktop {
+          margin-right: 25px;
+        }
+      }
+
+      // &.trigger:hover>div {
+      //   opacity: 1;
+      //   pointer-events: all;
+      // }
+
+      &:hover>nav {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          .nav__link {
+            color: var(--green-200);
           }
         }
+      }
+
+      &:hover>a::after {
+        width: 100%;
       }
 
       @include pad {
-        font-size: 18px;
-        padding: 5px 0;
-        position: relative;
+        overflow-x: auto;
+        //margin-right: 5% !important;
+
+        margin-top: 3px;
 
         &:not(:last-of-type) {
           margin-right: 15px;
         }
-      }
 
-      @include mobile {
-        font-size: 16px;
-      }
-
-      &__wrapper {
-        position: relative;
-
-        &:not(:last-of-type) {
-          margin-right: 35px;
-
-          @include desktop {
-            margin-right: 25px;
-          }
-        }
-
-        // &.trigger:hover>div {
-        //   opacity: 1;
-        //   pointer-events: all;
-        // }
-
-        &:hover>nav {
-          opacity: 1;
-          pointer-events: all;
-        }
-
-        @media (any-hover: hover) {
-          &:hover {
-            .nav__link {
-              color: var(--green-200);
-            }
-          }
-        }
-
-        &:hover>a::after {
-          width: 100%;
-        }
-
-        @include pad {
-          overflow-x: auto;
-          //margin-right: 5% !important;
-
-          margin-top: 3px;
-
-          &:not(:last-of-type) {
-            margin-right: 15px;
-          }
-
-          &::-webkit-scrollbar {
-            display: none;
-          }
+        &::-webkit-scrollbar {
+          display: none;
         }
       }
     }
+  }
 
-    &__sublink {
-      margin-bottom: 15px;
+  &__sublink {
+    margin-bottom: 15px;
 
-      &:first-of-type {
-        margin-top: 6px;
+    &:first-of-type {
+      margin-top: 6px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+
+    &:hover,
+    &.active {
+      color: var(--green-200);
+    }
+
+    @include pad {
+      margin-right: 15px;
+      display: none;
+
+      &.show {
+        display: block;
       }
 
       &:last-of-type {
-        margin-bottom: 0;
+        margin-bottom: 15px;
       }
+    }
 
-      &:hover,
-      &.active {
-        color: var(--green-200);
+    &__wrapper {
+      position: absolute;
+      z-index: 1;
+      left: 0;
+      display: flex;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+      flex-direction: column;
+      box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 0 0 8px 8px;
+      transform: translate(-15px, 10px);
+      padding: 20px 25px;
+      background-color: var(--white);
+
+      &:hover {
+        opacity: 1;
+        pointer-events: all;
       }
 
       @include pad {
-        margin-right: 15px;
-        display: none;
+        opacity: 1;
+        position: static;
+        background-color: transparent;
+        box-shadow: none;
+        flex-direction: row;
+        padding: 0;
+        border-radius: 0;
+        transform: none;
+        overflow-x: auto;
+        margin-right: 5%;
+        pointer-events: all;
+        margin-top: 10px;
 
-        &.show {
-          display: block;
+        &.active {
+          opacity: 1;
         }
 
-        &:last-of-type {
-          margin-bottom: 15px;
+        &::-webkit-scrollbar {
+          display: none;
         }
       }
 
-      &__wrapper {
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        display: flex;
-        opacity: 0;
-        transition: opacity 0.25s ease;
-        pointer-events: none;
-        flex-direction: column;
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
-        border-radius: 0 0 8px 8px;
-        transform: translate(-15px, 10px);
-        padding: 20px 25px;
-        background-color: var(--white);
+      &.nav__mobile {
+        order: 4;
+        margin-top: 0;
+        margin-right: 0;
+        width: 100%;
+        background-color: var(--grey-0);
+        box-shadow: -100px 0px 0px 0px var(--grey-0), 100px 0px 0px 0px var(--grey-0);
 
-        &:hover {
-          opacity: 1;
-          pointer-events: all;
+        .nav__sublink {
+          display: block;
+          margin-top: 0;
+          margin-bottom: 12px;
         }
 
-        @include pad {
-          opacity: 1;
-          position: static;
-          background-color: transparent;
-          box-shadow: none;
-          flex-direction: row;
-          padding: 0;
-          border-radius: 0;
-          transform: none;
-          overflow-x: auto;
-          margin-right: 5%;
-          pointer-events: all;
-          margin-top: 10px;
-
-          &.active {
-            opacity: 1;
-          }
-
-          &::-webkit-scrollbar {
-            display: none;
-          }
+        @include mobile {
+          margin-bottom: 10px;
         }
       }
     }
