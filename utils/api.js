@@ -35,3 +35,5 @@ export let loginDomain = "https://health-feg.udn.com";
 //   : "https://health-feg.udn.com";
 
 export const FOOTER = loginDomain + "/api/member/component";
+
+export const GRAPHQL_API = "https://kaik.io/graphql";
