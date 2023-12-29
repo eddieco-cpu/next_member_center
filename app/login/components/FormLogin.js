@@ -18,163 +18,16 @@ import { emailValidator, mobileNumberValidator } from "@utils/validator";
 import { getRecaptcha } from "@components/ReCaptcha";
 
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
+import {
+  getTeachifyUserSyntax,
+  getHasAccessToCourseSyntax,
+  registerTeachifyUserSyntax,
+} from "@utils/graphqlSyntax";
 
-//
-const getTeachifyUserSyntax = gql`
-  mutation LogIn($auth: LOGIN_AUTH!, $subdomain: String!) {
-    logIn(auth: $auth, subdomain: $subdomain) {
-      token
-      user {
-        email
-        id
-      }
-    }
-  }
-`;
-
-//
-async function proceedToLoginWithTeachify(data, redirect) {
-  try {
-    const teachifyToken = await teachifyLogin(data); //to be continued
-
-    //
-    if (!teachifyToken) throw new Error("teachifyToken is null");
-
-    // console.log("data", data);
-    // console.log("teachifyToken", teachifyToken);
-    return console.log("to be continued");
-
-    const nextPage = decodeURIComponent(redirect).toString();
-
-    if (!nextPage.includes("/course/")) {
-      redirectHandler(redirect);
-    } else {
-      const slug = nextPage.split("/").pop().split("?")[0];
-
-      //to be continued
-      getHasAccessToCourse({
-        variables: {
-          subdomain: "udnhealth",
-          slug,
-        },
-        context: {
-          headers: {
-            authorization: `Bearer ${teachifyToken}`,
-          },
-        },
-      });
-    }
-  } catch (e) {
-    return HealthModal.alert({
-      title: "登入失敗",
-      text: "請稍後再試" + e.message,
-      options: {
-        maskCallback: true,
-        closeCallback: true,
-      },
-      callback: () => {
-        setIsLoading(false);
-      },
-    });
-  }
-}
-
-async function teachifyLogin(memberData) {
-  const teachifyAuthData = await getTeachifyLoginData(memberData); //to be continued [p]
-
-  if (!teachifyAuthData) {
-    return; //setIsLoading(false)  //?
-  }
-
-  //to be continued [p]
-  const teachifyToken = await getTeachifyUserToken(
-    memberData,
-    teachifyAuthData
-  );
-
-  if (teachifyToken) {
-    localStorage.setItem("teachify_token", teachifyToken);
-  }
-
-  return teachifyToken;
-}
-
-async function getTeachifyLoginData(memberData) {
-  //to be continued
-  let url = "/api/member/teachify";
-  // process.env.NODE_ENV === 'development'
-  //   ? `${TEACHIFY_AUTH}?account=${memberData.account}`
-  //   : TEACHIFY_AUTH //--> /api/member/teachify
-
-  const res = await getData(url, { auth: true });
-  const { data } = res;
-  window.authData = res;
-
-  console.log("getTeachifyLoginData: ", data);
-
-  if (data.status === "404") {
-    console.log(data.status);
-    HealthModal.alert({
-      title: "", //data.status
-      text: data.message,
-    });
-    return false;
-  }
-  return data;
-}
-
-async function getTeachifyUserToken(memberData, userAuthData) {
-  try {
-    //
-    const data = await getTeachifyUserData(userAuthData);
-    const { logIn } = data;
-
-    console.log("--- getTeachifyUserData --- \n", data, "\n", logIn);
-
-    //
-    let teachifyUserObj = {
-      teachify: logIn.user.email,
-      udn: cookies.get("udnmember") || cookies.get("udnland"),
-    };
-    localStorage.setItem("teachify_user", JSON.stringify(teachifyUserObj));
-    //
-    const now = new Date();
-    const yearLater = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
-    document.cookie = `custom_teachify_user_id=${
-      logIn.user.id
-    }; expires=${yearLater.toUTCString()}; path=/`;
-
-    //
-    return logIn.token;
-
-    //
-  } catch ({ graphQLErrors }) {
-    const { code, message } = graphQLErrors[0];
-
-    // 006 才是沒註冊過，所以就幫他註冊
-    if (code !== "User-006" && code !== "User-004") return false;
-
-    //to be continued
-    return console.log("to be continued");
-
-    const { signUp } = await registerTeachifyUserData(memberData, userAuthData);
-    let teachifyUserObj = {
-      teachify: signUp.user?.email || "",
-      udn: cookies.get("udnmember") || cookies.get("udnland"),
-    };
-    localStorage.setItem("teachify_user", JSON.stringify(teachifyUserObj));
-
-    return signUp.token;
-  }
-}
-
-let getTeachifyUserData = null;
-
-//
-//
 //
 export default function FormLogin() {
   //
+  const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
 
@@ -183,12 +36,9 @@ export default function FormLogin() {
   const [pw, setPw] = useState("");
   const [acc, setAcc] = useState("");
 
-  const router = useRouter();
-
   //
   const [getTeachifyUser] = useMutation(getTeachifyUserSyntax);
-
-  getTeachifyUserData = async function getTeachifyUserData(userData) {
+  const getTeachifyUserData = async (userData) => {
     const { data } = await getTeachifyUser({
       variables: {
         auth: {
@@ -202,6 +52,189 @@ export default function FormLogin() {
     return data;
   };
 
+  const [registerTeachifyUser] = useMutation(registerTeachifyUserSyntax);
+  const registerTeachifyUserData = async (memberData, userData) => {
+    try {
+      const { data } = await registerTeachifyUser({
+        variables: {
+          auth: {
+            name: memberData.account,
+            email: userData.email,
+            password: userData.hash,
+            passwordConfirmation: userData.hash,
+            tos: true,
+          },
+          subdomain: "udnhealth",
+        },
+      });
+
+      return data;
+    } catch ({ graphQLErrors }) {
+      return {
+        signUp: {
+          token: false,
+          user: false,
+        },
+      };
+    }
+  };
+
+  const [getHasAccessToCourse] = useLazyQuery(getHasAccessToCourseSyntax, {
+    onCompleted: ({ course }) => {
+      console.log("getCourseDataSyntax", course);
+      //
+      if (course?.courseType === "paid" && !course?.isPurchased) {
+        //return navigate(`/member/payment?id=${course.slug}&type=course`)
+        return redirectHandler(
+          encodeURIComponent(
+            `${window.location.origin}/member/payment?id=${course.slug}&type=course`
+          )
+        );
+      } else {
+        return redirectHandler(redirect);
+      }
+    },
+    onError: (err) => {
+      //console.log(err)
+      return redirectHandler(redirect);
+    },
+  });
+
+  //
+  async function proceedToLoginWithTeachify(data, redirect) {
+    try {
+      const teachifyToken = await teachifyLogin(data); //to be continued
+
+      //
+      if (!teachifyToken) throw new Error("teachifyToken is null");
+
+      // console.log("data", data);
+      // console.log("teachifyToken", teachifyToken);
+      // return console.log("to be continued");
+
+      const nextPage = decodeURIComponent(redirect).toString();
+      if (!nextPage.includes("/course/")) {
+        redirectHandler(redirect);
+      } else {
+        const slug = nextPage.split("/").pop().split("?")[0];
+
+        getHasAccessToCourse({
+          variables: {
+            subdomain: "udnhealth",
+            slug,
+          },
+          context: {
+            headers: {
+              authorization: `Bearer ${teachifyToken}`,
+            },
+          },
+        });
+      }
+    } catch (e) {
+      return HealthModal.alert({
+        title: "登入失敗",
+        text: "請稍後再試" + e.message,
+        options: {
+          maskCallback: true,
+          closeCallback: true,
+        },
+        callback: () => {
+          setIsLoading(false);
+        },
+      });
+    }
+  }
+
+  async function teachifyLogin(memberData) {
+    const teachifyAuthData = await getTeachifyLoginData(memberData);
+
+    if (!teachifyAuthData) {
+      return; //setIsLoading(false)  //?
+    }
+
+    //to be continued [p]
+    const teachifyToken = await getTeachifyUserToken(
+      memberData,
+      teachifyAuthData
+    );
+
+    if (teachifyToken) {
+      localStorage.setItem("teachify_token", teachifyToken);
+    }
+
+    return teachifyToken;
+  }
+
+  async function getTeachifyLoginData() {
+    //
+    let url = "/api/member/teachify";
+    // process.env.NODE_ENV === 'development'
+    //   ? `${TEACHIFY_AUTH}?account=${memberData.account}`   //memberData 來自 func 參數
+    //   : TEACHIFY_AUTH //--> /api/member/teachify   //to be continued
+
+    const res = await getData(url, { auth: true });
+    const { data } = res;
+    window.authData = res;
+
+    console.log("getTeachifyLoginData: ", data);
+
+    if (data.status === "404") {
+      console.log(data.status);
+      HealthModal.alert({
+        title: "", //data.status
+        text: data.message,
+      });
+      return false;
+    } else {
+      return data;
+    }
+  }
+
+  async function getTeachifyUserToken(memberData, userAuthData) {
+    try {
+      //
+      const data = await getTeachifyUserData(userAuthData);
+      const { logIn } = data;
+      //console.log("--- getTeachifyUserData --- \n", data, "\n", logIn);
+
+      //
+      let teachifyUserObj = {
+        teachify: logIn.user.email,
+        udn: cookies.get("udnmember") || cookies.get("udnland"),
+      };
+      localStorage.setItem("teachify_user", JSON.stringify(teachifyUserObj));
+
+      //
+      const now = new Date();
+      const yearLater = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
+      document.cookie = `custom_teachify_user_id=${
+        logIn.user.id
+      }; expires=${yearLater.toUTCString()}; path=/`;
+
+      //
+      return logIn.token;
+      //
+    } catch ({ graphQLErrors }) {
+      const { code, message } = graphQLErrors[0];
+
+      // 006 才是沒註冊過，所以就幫他註冊
+      if (code !== "User-006" && code !== "User-004") return false;
+
+      const { signUp } = await registerTeachifyUserData(
+        memberData,
+        userAuthData
+      );
+      let teachifyUserObj = {
+        teachify: signUp.user?.email || "",
+        udn: cookies.get("udnmember") || cookies.get("udnland"),
+      };
+      localStorage.setItem("teachify_user", JSON.stringify(teachifyUserObj));
+
+      return signUp.token;
+    }
+  }
+
+  //
   async function handleLogin() {
     //
     if (!acc || !pw) {
