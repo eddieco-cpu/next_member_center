@@ -13,3 +13,7 @@ export function redirectHandler(redirectURI) {
     window.location.href = origin + "/member/user";
   }
 }
+
+export function convertCookieObjArrayToString(arr) {
+  return arr.map(obj => `${obj.name}=${obj.value}`).join(';');
+}
