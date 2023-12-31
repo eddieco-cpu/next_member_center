@@ -3,9 +3,12 @@ import { cookies } from "next/headers";
 
 import { PageTitle, Container } from "@components/ui/Layout";
 import PageDevName from "@components/ui/PageDevName";
+import classes from "./page.module.scss";
 
 import {convertCookieObjArrayToString} from "@utils/helper";
 import {fetchDataWithCookieInServer, TRACK_STATE} from "@utils/api";
+
+import Avater from "./components/Avater";
 
 export default async function Page() {
   //
@@ -24,12 +27,20 @@ export default async function Page() {
   const cookieString = convertCookieObjArrayToString([udngold, udnland, um2, udnmember]);
 
   const trackState = await fetchDataWithCookieInServer(TRACK_STATE, cookieString);
-  console.log("trackState: \n", trackState);
+  const tracklist = trackState.list || [];
+
 
   return (
     <main className="page_body">
-        <Container className={` small`}>
+      <Container className={` small ${classes.track__wrapper}`}>
         <PageTitle>您正在追蹤的專家</PageTitle>
+        <div className={classes.track__container}>
+          <ul className={classes.lineup__group}>
+          {tracklist.map((el) => (
+            <Avater key={el.track_id} {...el} />
+          ))}
+          </ul>
+        </div>
       </Container>
       <PageDevName>track</PageDevName>
     </main>

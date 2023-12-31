@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-export function postForm(url, data) {
+export function postForm(url, data) { //post without cookie
   //
   const formData = new URLSearchParams();
   for (let key in data) {
@@ -19,6 +19,20 @@ export function postForm(url, data) {
     },
     method: "POST",
   });
+}
+
+export function postData(url, data, option = { auth: true }) { //post with cookie
+  const axiosInstance = axios.create({
+    xsrfCookieName: '',
+    xsrfHeaderName: '',
+    withCredentials: true
+  })
+  return axiosInstance({
+    url,
+    data,
+    withCredentials: option.auth,
+    method: 'POST'
+  })
 }
 
 export function getData(url, option = { auth: true }) {

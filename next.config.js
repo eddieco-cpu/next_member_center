@@ -26,6 +26,10 @@ const nextConfig = {
         source: "/api/member/teachify",
         destination: "https://lab7-health.udn.com/api/member/teachify",
       },
+      {
+        source: "/api/track/switch",
+        destination: "https://interactive.udn.com/api/track/switch",
+      }
     ];
   },
 };
