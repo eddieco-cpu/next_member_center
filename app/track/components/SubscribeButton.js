@@ -37,7 +37,7 @@ export default function SubscribeButton({ track_id, title, setIsSubscribed }) {
 		try {
 			let {
 				data: { state = 'unsure' }
-			} = await postForm(
+			} = await postData(
 				'/api/track/switch',
 				{
 					channel_id: '1005',
