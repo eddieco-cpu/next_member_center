@@ -29,7 +29,11 @@ const nextConfig = {
       {
         source: "/api/track/switch",
         destination: "https://interactive.udn.com/api/track/switch",
-      }
+      },
+      {
+        source: "/api/track/expert/:path*",
+        destination: "https://lab7-health.udn.com/api/track/expert/:path*",
+      },
     ];
   },
 };
