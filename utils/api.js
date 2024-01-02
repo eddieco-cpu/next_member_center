@@ -6,7 +6,8 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-export function postForm(url, data) { //post without cookie
+export function postForm(url, data) {
+  //post without cookie
   //
   const formData = new URLSearchParams();
   for (let key in data) {
@@ -21,18 +22,19 @@ export function postForm(url, data) { //post without cookie
   });
 }
 
-export function postData(url, data, option = { auth: true }) { //post with cookie
+export function postData(url, data, option = { auth: true }) {
+  //post with cookie
   const axiosInstance = axios.create({
-    xsrfCookieName: '',
-    xsrfHeaderName: '',
-    withCredentials: true
-  })
+    xsrfCookieName: "",
+    xsrfHeaderName: "",
+    withCredentials: true,
+  });
   return axiosInstance({
     url,
     data,
     withCredentials: option.auth,
-    method: 'POST'
-  })
+    method: "POST",
+  });
 }
 
 export function getData(url, option = { auth: true }) {
@@ -46,11 +48,11 @@ export function getData(url, option = { auth: true }) {
 export async function fetchDataWithCookieInServer(url, cookie) {
   try {
     const response = await fetch(url, {
-      method: 'GET', // 或是 'POST'
+      method: "GET", // 或是 'POST'
       headers: {
-        'Content-Type': 'application/json',
-        'Cookie': cookie 
-      }
+        "Content-Type": "application/json",
+        Cookie: cookie,
+      },
     });
 
     if (!response.ok) {
@@ -60,7 +62,7 @@ export async function fetchDataWithCookieInServer(url, cookie) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching data: ', error);
+    console.error("Error fetching data: ", error);
     return null;
   }
 }
@@ -74,4 +76,4 @@ export const FOOTER = loginDomain + "/api/member/component";
 
 export const GRAPHQL_API = "https://kaik.io/graphql";
 
-export const TRACK_STATE = 'https://lab7-health.udn.com/api/track/list' //https://lab7-health.udn.com/api/track/list
+export const TRACK_STATE = "https://lab7-health.udn.com/api/track/list"; //https://lab7-health.udn.com/api/track/list
