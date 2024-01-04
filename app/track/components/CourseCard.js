@@ -1,7 +1,5 @@
 import classes from "../author/1005/[track_id]/page.module.scss";
 
-console.log("@@@@");
-
 export default function CourseCard(props) {
   return (
     <li

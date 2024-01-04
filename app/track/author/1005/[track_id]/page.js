@@ -12,6 +12,8 @@ import { fetchDataWithCookieInServer, TRACK_STATE } from "@utils/api";
 
 import Avater from "../../../components/Avater";
 import CourseCard from "../../../components/CourseCard";
+import SessionCard from "../../../components/SessionCard";
+import ArticleCard from "../../../components/ArticleCard";
 import GetMoreViaClient from "../../../components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
 
@@ -61,21 +63,47 @@ export default async function Page({ params }) {
   return (
     <main className="page_body">
       <Container className={` small ${classes.track__wrapper}`}>
-        {/* <PageTitle>{params.track_id}</PageTitle> */}
         <div className={classes.author__container}>
+          {/* ===============  back to track list page ================ */}
           <Link href={`/track`} className={classes.linker}>
             <i className="i-arrow7-left"></i>
             回列表頁
           </Link>
+
+          {/* ===============  avater  ================ */}
           <ul className={classes.track__avater}>
             <Avater {...trackItem} needSpecialist={true} />
           </ul>
+
+          {/* ===============  session  =============== */}
+          {trackData?.list?.session?.length ? (
+            <>
+              <ThemeTitle>活動專區</ThemeTitle>
+
+              <ul
+                className={`${classes.track__theme} ${classes["track__theme--video"]}`}
+              >
+                {trackData?.list?.session.map((el) => (
+                  <SessionCard key={el.slug} {...el} />
+                ))}
+              </ul>
+              {trackData.hasMore.includes("session") && (
+                <GetMoreViaClient
+                  id={params.track_id}
+                  type="session"
+                  themeClassName={classes["track__theme--video"]}
+                  moreClassName={classes["track__more--video"]}
+                />
+              )}
+            </>
+          ) : (
+            ""
+          )}
 
           {/* ===============  course  ================ */}
           {trackData?.list?.course?.length ? (
             <>
               <ThemeTitle>課程專區</ThemeTitle>
-
               <ul
                 className={`${classes.track__theme} ${classes["track__theme--video"]}`}
               >
@@ -83,10 +111,37 @@ export default async function Page({ params }) {
                   <CourseCard key={el.slug} {...el} />
                 ))}
               </ul>
-              {trackData.hasMore.includes("course") ? (
-                <GetMoreViaClient id={params.track_id} />
-              ) : (
-                <></>
+              {trackData.hasMore.includes("course") && (
+                <GetMoreViaClient
+                  id={params.track_id}
+                  type="course"
+                  themeClassName={classes["track__theme--video"]}
+                  moreClassName={classes["track__more--video"]}
+                />
+              )}
+            </>
+          ) : (
+            ""
+          )}
+
+          {/* ===============  article  =============== */}
+          {trackData?.list?.article?.length ? (
+            <>
+              <ThemeTitle>文章專區</ThemeTitle>
+              <ul
+                className={`${classes.track__theme} ${classes["track__theme--article"]}`}
+              >
+                {trackData?.list?.article.map((el) => (
+                  <ArticleCard key={el.art_id} {...el} />
+                ))}
+              </ul>
+              {trackData.hasMore.includes("article") && (
+                <GetMoreViaClient
+                  id={params.track_id}
+                  type="article"
+                  themeClassName={classes["track__theme--article"]}
+                  moreClassName={classes["track__more--article"]}
+                />
               )}
             </>
           ) : (

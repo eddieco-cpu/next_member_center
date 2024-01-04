@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import CourseCard from "./CourseCard";
+import SessionCard from "./SessionCard";
+import ArticleCard from "./ArticleCard";
 import ShowMore from "./ShowMore";
 
 import { getData } from "@utils/api";
@@ -9,7 +11,12 @@ import { doWait } from "@utils/helper";
 
 import classes from "../author/1005/[track_id]/page.module.scss";
 
-export default function GetMoreViaClient({ id }) {
+export default function GetMoreViaClient({
+  id,
+  type,
+  themeClassName,
+  moreClassName,
+}) {
   //
   const [trackData, setTrackData] = useState([]);
   const [showMoreClassName, setShowMoreClassName] = useState("");
@@ -47,18 +54,24 @@ export default function GetMoreViaClient({ id }) {
 
   return (
     <>
-      <ul
-        className={`${classes.track__theme} ${classes["track__theme--video"]}`}
-      >
-        {trackData.map((el) => (
-          <CourseCard key={el.slug} {...el} />
-        ))}
+      <ul className={`${classes.track__theme} ${themeClassName}`}>
+        {trackData.map((el) =>
+          type === "course" ? (
+            <CourseCard key={el.slug} {...el} />
+          ) : type === "session" ? (
+            <SessionCard key={el.slug} {...el} />
+          ) : type === "article" ? (
+            <ArticleCard key={el.art_id} {...el} />
+          ) : (
+            <></>
+          )
+        )}
       </ul>
       <ShowMore
-        className={`${classes["track__more"]} ${classes["track__more--video"]}`}
+        className={`${classes.track__more} ${moreClassName}`}
         showMoreAPI={showMoreAPI}
         showMoreClassName={showMoreClassName}
-        type="course"
+        type={type}
       />
     </>
   );
