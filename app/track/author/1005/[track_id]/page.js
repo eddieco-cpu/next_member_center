@@ -1,15 +1,19 @@
 import Image from "next/image";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { PageTitle, Container } from "@components/ui/Layout";
 import PageDevName from "@components/ui/PageDevName";
-//import classes from "./page.module.scss";
+import classes from "./page.module.scss";
 
 import { convertCookieObjArrayToString } from "@utils/helper";
 import { fetchDataWithCookieInServer, TRACK_STATE } from "@utils/api";
 
-//import Avater from "./components/Avater";
+import Avater from "../../../components/Avater";
+import CourseCard from "../../../components/CourseCard";
+import GetMoreViaClient from "../../../components/GetMoreViaClient";
+import { ThemeTitle } from "@components/ui/Layout";
 
 async function fetchData(url) {
   const res = await fetch(url);
@@ -48,16 +52,47 @@ export default async function Page({ params }) {
   }
 
   //
-  const data = await fetchData(
+  const trackData = await fetchData(
     `http://localhost:3006/api/track/expert?author_id=${params.track_id}&per_page=6`
   );
-  console.log("data: ", data);
+  console.log("trackData: ", trackData);
 
   //
   return (
     <main className="page_body">
-      <Container className={` small`}>
-        <PageTitle>{params.track_id}</PageTitle>
+      <Container className={` small ${classes.track__wrapper}`}>
+        {/* <PageTitle>{params.track_id}</PageTitle> */}
+        <div className={classes.author__container}>
+          <Link href={`/track`} className={classes.linker}>
+            <i className="i-arrow7-left"></i>
+            回列表頁
+          </Link>
+          <ul className={classes.track__avater}>
+            <Avater {...trackItem} needSpecialist={true} />
+          </ul>
+
+          {/* ===============  course  ================ */}
+          {trackData?.list?.course?.length ? (
+            <>
+              <ThemeTitle>課程專區</ThemeTitle>
+
+              <ul
+                className={`${classes.track__theme} ${classes["track__theme--video"]}`}
+              >
+                {trackData?.list?.course.map((el) => (
+                  <CourseCard key={el.slug} {...el} />
+                ))}
+              </ul>
+              {trackData.hasMore.includes("course") ? (
+                <GetMoreViaClient id={params.track_id} />
+              ) : (
+                <></>
+              )}
+            </>
+          ) : (
+            ""
+          )}
+        </div>
       </Container>
       <PageDevName>track</PageDevName>
     </main>

@@ -194,3 +194,26 @@
     background-color: darken($color: $green-200, $amount: 5);
   }
 }
+
+.title__wrapper--shared {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.container__title--shared {
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: 18px;
+  color: #218431;
+  padding: 15px 0 20px;
+  font-weight: 300;
+  -webkit-text-decoration: underline #218431 1px;
+  text-decoration: underline #218431 1px;
+  text-underline-offset: 5px;
+
+  @include desktop {
+    padding: 15px 0 15px;
+  }
+}

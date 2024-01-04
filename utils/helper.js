@@ -17,3 +17,11 @@ export function redirectHandler(redirectURI) {
 export function convertCookieObjArrayToString(arr) {
   return arr.map((obj) => `${obj.name}=${obj.value}`).join(";");
 }
+
+export function doWait(times = 200) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, times * 1);
+  });
+}

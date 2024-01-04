@@ -39,4 +39,13 @@ className 改寫：
 
 ```js
 // 幫我將 className 的 value 從原本的 "login__tab login__tab--left" 換成 {`${classes.login__tab} ${classes["login__tab--left"]} `} 這種型式
+
+/** 
+i.e.
+origin:
+className="card__bottom-left-round__list-item  card__bottom-left-round__list-item--comparison"
+
+changed:
+className={`${classes["card__bottom-left-round__list-item"]} ${classes["card__bottom-left-round__list-item--comparison"]} `}
+ */
 ```

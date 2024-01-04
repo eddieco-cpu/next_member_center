@@ -46,3 +46,14 @@ export const Btn = ({ children, className, ...keys }) => (
     {children}
   </button>
 );
+
+export const ThemeTitle = ({ children, className, ...keys }) => {
+  return (
+    <div
+      className={classes["title__wrapper--shared"] + ` ${className || ""}`}
+      {...keys}
+    >
+      <h3 className={classes["container__title--shared"]}>{children}</h3>
+    </div>
+  );
+};

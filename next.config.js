@@ -34,6 +34,10 @@ const nextConfig = {
         source: "/api/track/expert/:path*",
         destination: "https://lab7-health.udn.com/api/track/expert/:path*",
       },
+      {
+        source: "/api/expert/:path*",
+        destination: "https://lab7-health.udn.com/api/expert/:path*",
+      },
     ];
   },
 };
