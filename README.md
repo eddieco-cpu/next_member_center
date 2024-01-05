@@ -1,51 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+- 所有的 parallel route 都需要再配置一個 default.js
+  為了不匹配的狀況時所準備，不準備會出錯
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 當 intercepting route 寫在某一目錄下時，會在 soft navigation 時，取代該目錄底下同名的子目錄 page.js
+  例如:
+  ├── track/
+  │ ├── (.)author/
+  │ │ ├── page.js
+  │ ├── author/
+  │ │ ├── page.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+此時，
+當 soft navigation 到 track/author/ 時，(.)author/ 會取代 author/ 的 page.js
+而 hard navigation 則不會
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- (.)author 的 (.)，代表的是 "./" 的意思，即:取代同級目錄下的 author
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-className 改寫：
-
-```js
-// 幫我將 className 的 value 從原本的 "login__tab login__tab--left" 換成 {`${classes.login__tab} ${classes["login__tab--left"]} `} 這種型式
-
-/** 
-i.e.
-origin:
-className="card__bottom-left-round__list-item  card__bottom-left-round__list-item--comparison"
-
-changed:
-className={`${classes["card__bottom-left-round__list-item"]} ${classes["card__bottom-left-round__list-item--comparison"]} `}
- */
-```
+- 當 intercepting route 寫在 parallel route 目錄下時，是使用 (.) 而不是 (..)
+  官方說法: `since @modal is a slot and not a segment.`
+  例如:
+  ├── track/
+  │ ├── @modal/
+  │ │ ├── default.js
+  │ │ ├── (.)author/
+  │ │ │ ├── page.js
+  │ ├── author/
+  │ │ ├── page.js
