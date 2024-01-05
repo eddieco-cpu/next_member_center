@@ -1,19 +1,9 @@
-"use client";
-import { useRouter } from "next/navigation";
+import PopupFrame from "@components/ui/PopupFrame";
 
 export default function TrackModal({ params: { track_id } }) {
-  const router = useRouter();
-
-  function onDismiss() {
-    router.back();
-  }
-
   return (
-    <div className="modal-backdrop" onClick={onDismiss}>
-      <dialog className="modal" onClose={onDismiss}>
-        {track_id}
-        <button onClick={onDismiss} className="close-button" />
-      </dialog>
-    </div>
+    <PopupFrame>
+      <h1>track_id: {track_id}</h1>
+    </PopupFrame>
   );
 }
