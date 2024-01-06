@@ -15,7 +15,7 @@ export function redirectHandler(redirectURI) {
 }
 
 export function convertCookieObjArrayToString(arr) {
-  return arr.map((obj) => `${obj.name}=${obj.value}`).join(";");
+  return arr.map((obj) => `${obj?.name}=${obj?.value}`).join(";");
 }
 
 export function doWait(times = 200) {

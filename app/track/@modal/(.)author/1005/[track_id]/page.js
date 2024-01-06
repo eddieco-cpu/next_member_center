@@ -1,9 +1,35 @@
-import PopupFrame from "@components/ui/PopupFrame";
+import { cookies } from "next/headers";
 
-export default function TrackModal({ params: { track_id } }) {
+import { convertCookieObjArrayToString } from "@utils/helper";
+import { fetchDataWithCookieInServer, TRACK_STATE } from "@utils/api";
+
+import ClientContainer from "./ClientContainer";
+
+export default async function page({ params: { track_id } }) {
+  //
+  const cookieStore = cookies();
+
+  const udnmember = cookieStore.get("udnmember");
+  const udngold = cookieStore.get("udngold");
+  const udnland = cookieStore.get("udnland");
+  const um2 = cookieStore.get("um2");
+
+  const cookieString = convertCookieObjArrayToString([
+    udngold,
+    udnland,
+    um2,
+    udnmember,
+  ]);
+
+  const trackState = await fetchDataWithCookieInServer(
+    TRACK_STATE,
+    cookieString
+  );
+  const tracklist = trackState?.list || [];
+  
   return (
-    <PopupFrame>
-      <h1>track_id: {track_id}</h1>
-    </PopupFrame>
+    <>
+      <ClientContainer {...{track_id, tracklist}}></ClientContainer>
+    </>
   );
 }

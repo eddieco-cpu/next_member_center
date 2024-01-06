@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import classes from "./layout.module.scss";
 
-export default function PopupFrame(props) {
+export default function PopupFrame({children, targetPath, onTogglePrev, onToggleNext}) {
   //
   const router = useRouter();
 
@@ -19,6 +19,8 @@ export default function PopupFrame(props) {
     router.back();
   }
   const integer = (value) => Math.round(value * 10) / 10;
+  const limitValue = (value, limit = 100) => Math.min(limit, Math.max(limit * -1, value));
+
   const initDrag = (e) => {
     setIsDragging(true);
     setOffsetX(integer(e.clientX - movedX));
@@ -26,8 +28,8 @@ export default function PopupFrame(props) {
   };
   const doDrag = (e) => {
     if (!isDragging) return;
-    setMovedX(integer(e.clientX - offsetX));
-    setMovedY(integer(e.clientY - offsetY));
+    setMovedX(limitValue(integer(e.clientX - offsetX), 500));
+    setMovedY(limitValue(integer(e.clientY - offsetY), 500));
   };
   const stopDrag = () => {
     setIsDragging(false);
@@ -43,11 +45,27 @@ export default function PopupFrame(props) {
         onMouseUp={() => stopDrag()}
         style={{ ["--x"]: `${movedX}px`, ["--y"]: `${movedY}px` }}
       >
-        {props.children}
+        {children}
         <i
           onClick={onDismiss}
-          className={"close " + classes["popup--close-button"]}
+          className={`close ${classes["popup-button"]} ${classes["popup-button--close"]}`}
         />
+        {
+          onTogglePrev && (
+            <i
+              onClick={onTogglePrev}
+              className={`i-arrow7-left ${classes["popup-button"]} ${classes["popup-button--toggle-prev"]}`}
+            />
+          )
+        }
+        {
+          onToggleNext && (
+            <i
+              onClick={onToggleNext}
+              className={`i-arrow7-right ${classes["popup-button"]} ${classes["popup-button--toggle-next"]}`}
+            />
+          )
+        }
       </dialog>
     </div>
   );

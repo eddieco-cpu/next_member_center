@@ -35,7 +35,7 @@ export default async function Page() {
     TRACK_STATE,
     cookieString
   );
-  const tracklist = trackState.list || [];
+  const tracklist = trackState?.list || [];
 
   return (
     <main className="page_body">

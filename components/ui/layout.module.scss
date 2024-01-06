@@ -233,27 +233,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 20;
 
   overflow: hidden;
 }
 
 .popup {
-  width: 80%;
-  max-width: 500px;
-  height: auto;
-  max-height: 80%;
-  border: none;
-  border-radius: 12px;
+  display: block;
+  width: 1000px;
+  height: 90vh;
   background-color: white;
-  padding: 20px;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 48px;
-  font-weight: 500;
 
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+
+  position: fixed;
   margin: auto;
   top: 0;
   left: 0;
@@ -267,17 +263,26 @@
     cursor: grabbing;
   }
 
-  &--close-button {
+  &-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 48px;
-    height: 48px;
+    margin: auto;
+
     background-color: transparent;
     border: none;
+
+    display: block;
+    width: 48px;
+    height: 48px;
+
+    cursor: pointer;
+  }
+
+  &-button--close { 
+    top: 5px;
+    right: 5px;
     border-radius: 15px;
     /* Circular shape */
-    cursor: pointer;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,7 +302,6 @@
       }
     }
 
-
     &::before {
       content: "\2c";
       font-family: "fontello";
@@ -307,8 +311,43 @@
       color: #666;
     }
   }
-}
+  &-button--toggle-prev {
+    top: 0;
+    bottom: 0;
+    left: -50px;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0.2;
 
+    &:hover {
+      opacity: 0.85;
+    }
+    &:active {
+      opacity: 0.5;
+    }
+  }
+  &-button--toggle-next {
+    top: 0;
+    bottom: 0;
+    right: -50px;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0.2;
+
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 0.4;
+    }
+  }
+}
 
 .cards-container {
   display: grid;
