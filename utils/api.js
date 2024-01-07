@@ -45,6 +45,12 @@ export function getData(url, option = { auth: true }) {
   });
 }
 
+export async function fetchData(url) {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
+
 export async function fetchDataWithCookieInServer(url, cookie) {
   try {
     const response = await fetch(url, {

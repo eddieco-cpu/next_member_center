@@ -4,15 +4,16 @@ import { useRouter } from "next/navigation";
 
 import classes from "./layout.module.scss";
 
-export default function PopupFrame({children, targetPath, onTogglePrev, onToggleNext}) {
+
+export default function PopupFrame({children, onTogglePrev, onToggleNext}) {
   //
   const router = useRouter();
 
   const [isDragging, setIsDragging] = useState(false);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const [movedX, setMovedX] = useState(0);
-  const [movedY, setMovedY] = useState(0);
+  const [movedX, setMovedX] = useState(sessionStorage?.getItem("popupFrameMovedX") * 1 || 0);
+  const [movedY, setMovedY] = useState(sessionStorage?.getItem("popupFrameMovedY") * 1 || 0);
 
   //
   function onDismiss() {
@@ -32,6 +33,8 @@ export default function PopupFrame({children, targetPath, onTogglePrev, onToggle
     setMovedY(limitValue(integer(e.clientY - offsetY), 500));
   };
   const stopDrag = () => {
+    sessionStorage.setItem("popupFrameMovedX", movedX);
+    sessionStorage.setItem("popupFrameMovedY", movedY);
     setIsDragging(false);
   };
 

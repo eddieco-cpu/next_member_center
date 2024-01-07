@@ -8,7 +8,7 @@ import PageDevName from "@components/ui/PageDevName";
 import classes from "./page.module.scss";
 
 import { convertCookieObjArrayToString } from "@utils/helper";
-import { fetchDataWithCookieInServer, TRACK_STATE } from "@utils/api";
+import { fetchDataWithCookieInServer, fetchData, TRACK_STATE } from "@utils/api";
 
 import Avater from "../../../components/Avater";
 import CourseCard from "../../../components/CourseCard";
@@ -17,11 +17,7 @@ import ArticleCard from "../../../components/ArticleCard";
 import GetMoreViaClient from "../../../components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
 
-async function fetchData(url) {
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-}
+
 
 export default async function Page({ params }) {
   //

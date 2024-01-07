@@ -167,6 +167,48 @@
       }
     }
   }
+  &__container--popup {
+    margin-top: 30px;
+    .track__avater {
+      //outline: 1px solid orange;
+      justify-content: flex-start;
+    }
+    .track__data-list {
+      //outline: 1px solid orange;
+      box-sizing: border-box;
+      height: calc(90vh - 40px - 150px - 70px);
+      padding-bottom: 0px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        &-track {
+            background-color: rgba($color: #000000, $alpha: 0);
+          }
+        &-thumb {
+            background-color: darken($color: #ccc, $amount: 4);
+            border-radius: 5px;
+            &:active {
+              background-color: darken($color: #ccc, $amount: 14);
+            }
+          }
+      }
+    }
+    .track__theme {
+      width: calc(330px * 2);
+      margin-left: auto;
+      margin-right: auto;
+      transform: translateX(5px);
+
+      @media screen and (max-width: 799px) {
+        width: 100%;
+        transform: translateX(0);
+      }
+    }
+    .track__more--article {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .card__bottom-left-round {

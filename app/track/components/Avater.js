@@ -14,7 +14,9 @@ export default function Avater(props) {
       <li
         className={`${classes["item-listing__photo-circle"]} ${classes["circle-pic-item__wrapper"]}`}
       >
-        <SubscribeButton {...{ track_id, title, setIsSubscribed }} />
+        {!props?.hideSubscribeBtn &&
+          <SubscribeButton {...{ track_id, title, setIsSubscribed }} />
+        }
         {props.needSpecialist && props.specialist ? (
           <a
             className={`${classes["circle-pic-item__type-link"]}`}
@@ -28,10 +30,9 @@ export default function Avater(props) {
         <Link
           // to={`/track/author/1005/${props.track_id}`}
           href={`/track/author/1005/${props.track_id}`}
-          className={`${classes["circle-pic-item__substance"]} ${
-            props.needSpecialist &&
+          className={`${classes["circle-pic-item__substance"]} ${props.needSpecialist &&
             classes["circle-pic-item__substance--lifeless"]
-          }`}
+            }`}
         >
           <picture className={`${classes["circle-pic-item__photo"]}`}>
             <img alt="" src={props.author_pic} />
