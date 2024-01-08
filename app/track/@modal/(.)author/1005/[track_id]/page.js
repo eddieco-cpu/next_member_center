@@ -26,10 +26,10 @@ export default async function page({ params: { track_id } }) {
     cookieString
   );
   const tracklist = trackState?.list || [];
-  
+
   return (
     <>
-      <ClientContainer {...{track_id, tracklist}}></ClientContainer>
+      <ClientContainer {...{ track_id, tracklist }}></ClientContainer>
     </>
   );
 }
