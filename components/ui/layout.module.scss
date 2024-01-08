@@ -264,6 +264,14 @@
     cursor: grabbing;
   }
 
+  @include mobile {
+    transform: translate(0, 0);
+    cursor: auto;
+    &:active {
+      cursor: auto;
+    }
+  }
+
   &-button {
     position: absolute;
     margin: auto;
