@@ -3,6 +3,10 @@ import { cookies } from "next/headers";
 export async function GET(request, { params }) {
   //
   const slug = params.slug;
+  console.log(
+    "called: \n",
+    "http://localhost:3006/api/try/cookies/read/" + slug
+  );
 
   if (slug === "all") {
     //way 1.
