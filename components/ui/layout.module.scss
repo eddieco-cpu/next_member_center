@@ -267,6 +267,7 @@
   @include mobile {
     transform: translate(0, 0);
     cursor: auto;
+
     &:active {
       cursor: auto;
     }
@@ -286,12 +287,12 @@
     cursor: pointer;
   }
 
-  &-button--close { 
+  &-button--close {
     top: 5px;
     right: 5px;
     border-radius: 15px;
     /* Circular shape */
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -320,6 +321,7 @@
       color: #666;
     }
   }
+
   &-button--toggle-prev {
     top: 0;
     bottom: 0;
@@ -334,13 +336,16 @@
     &:hover {
       opacity: 0.85;
     }
+
     &:active {
       opacity: 0.5;
     }
+
     @include mobile {
       display: none;
     }
   }
+
   &-button--toggle-next {
     top: 0;
     bottom: 0;
@@ -355,9 +360,11 @@
     &:hover {
       opacity: 0.8;
     }
+
     &:active {
       opacity: 0.4;
     }
+
     @include mobile {
       display: none;
     }
@@ -385,4 +392,185 @@
   font-size: 24px;
   font-weight: 500;
   max-width: 200px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+
+  @include pad {
+    flex-wrap: wrap;
+  }
+
+  & {
+    &__wrapper {
+      @include pad {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+    }
+
+    &__number {
+      flex-basis: 50px;
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid var(--grey-0);
+      transition: all 0.25s ease;
+      margin-right: 15px;
+
+      &.active {
+        color: var(--white);
+        background-color: var(--green-200);
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: var(--white);
+          background-color: var(--green-200);
+        }
+      }
+
+      @include mobile {
+        flex-basis: 40px;
+        height: 40px;
+      }
+
+      @media (max-width: 320px) {
+        margin-right: 10px;
+      }
+
+      &.small {
+        font-size: 14px;
+
+        @include mobile {
+          font-size: 12px;
+        }
+
+        @media (max-width: 320px) {
+          font-size: 10px;
+        }
+      }
+
+      &.last {
+        margin-right: 0;
+      }
+    }
+
+    &__btn {
+      border-radius: 3px;
+      margin-right: 20px;
+      width: 100px;
+      height: 50px;
+      font-size: 18px;
+      border: 1px solid var(--grey-0);
+
+      transition: background-color 0.25s ease;
+      background-color: white;
+      color: black;
+
+      &:hover {
+        background-color: darken($color: #fff, $amount: 5);
+      }
+
+      pointer-events: none;
+      transition: all 0.25s ease;
+      color: var(--grey-100);
+      opacity: 0;
+
+      &.enable {
+        pointer-events: all;
+        color: var(--black);
+        opacity: 1;
+      }
+
+      &:nth-of-type(2),
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:nth-of-type(2) {
+        @include pad {
+          margin-right: 20px;
+        }
+      }
+
+      &--first {
+        @include pad {
+          order: 2;
+        }
+      }
+
+      &--prev {
+        @include pad {
+          order: 3;
+        }
+
+        @include mobile {
+          display: none;
+        }
+      }
+
+      &--next {
+        @include pad {
+          order: 4;
+        }
+
+        @include mobile {
+          display: none;
+        }
+      }
+
+      &--last {
+        @include pad {
+          order: 5;
+        }
+      }
+    }
+
+    &--hint {
+      margin: 0 15px;
+      font-size: 18px;
+      line-height: 50px;
+      opacity: 0;
+      transform: translateY(-5px);
+      transition: opacity 0.25s ease;
+      cursor: default;
+
+      &.show {
+        opacity: 1;
+      }
+
+      @include mobile {
+        line-height: 36px;
+      }
+
+      @media (max-width: 320px) {
+        margin: 0 10px;
+      }
+    }
+
+    &__total {
+      color: var(--grey-200);
+      margin-left: 20px;
+      text-align: center;
+      font-size: 15px;
+
+      span {
+        font-size: 18px;
+      }
+
+      @include pad {
+        order: 6;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+      }
+    }
+  }
 }

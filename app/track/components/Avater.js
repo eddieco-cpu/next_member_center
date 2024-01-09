@@ -30,6 +30,7 @@ export default function Avater(props) {
         <Link
           // to={`/track/author/1005/${props.track_id}`}
           href={`/track/author/1005/${props.track_id}`}
+          scroll={false}
           className={`${classes["circle-pic-item__substance"]} ${
             props.needSpecialist &&
             classes["circle-pic-item__substance--lifeless"]

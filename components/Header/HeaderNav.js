@@ -38,11 +38,11 @@ export const headerNav = [
     ],
   },
   {
-    link: "/collection/1",
+    link: "/collection",
     title: "我的最愛",
     items: [
       {
-        link: "",
+        link: "/1",
         title: "我的收藏",
       },
       {

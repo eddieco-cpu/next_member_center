@@ -83,3 +83,8 @@ export const FOOTER = loginDomain + "/api/member/component";
 export const GRAPHQL_API = "https://kaik.io/graphql";
 
 export const TRACK_STATE = "https://lab7-health.udn.com/api/track/list"; //https://lab7-health.udn.com/api/track/list
+
+export const COLLECTION_LIST_PATH =
+  "https://lab7-misc.udn.com/api/collect/mynews"; //"https://interactive.udn.com/api/collect/mynews"; //https://lab7-misc.udn.com/api/collect/mynews
+
+export const COLLECTION_REMOVE_PATH = "/api/collect/switch"; //https://interactive.udn.com/api/collect/switch

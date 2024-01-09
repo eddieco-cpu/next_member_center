@@ -1,16 +1,59 @@
 import Image from "next/image";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { PageTitle, Container } from "@components/ui/Layout";
-import PageDevName from "@components/ui/PageDevName";
+import Pagination from "@components/Pagination";
+import Collection from "../components/Collection";
 
-export default function Page({ params: { pageId } }) {
+import { convertCookieObjArrayToString } from "@utils/helper";
+import { fetchDataWithCookieInServer, COLLECTION_LIST_PATH } from "@utils/api";
+
+import classes from "../page.module.scss";
+
+function isPositiveInteger(value) {
+  return /^[1-9]\d*$/.test(String(value));
+}
+
+export default async function Page({ params: { pageId } }) {
+  //
+  const cookieStore = cookies();
+
+  const udnmember = cookieStore.get("udnmember");
+  const udngold = cookieStore.get("udngold");
+  const udnland = cookieStore.get("udnland");
+  const um2 = cookieStore.get("um2");
+
+  const cookieString = convertCookieObjArrayToString([
+    udngold,
+    udnland,
+    um2,
+    udnmember,
+  ]);
+
+  const limit = 15;
+
+  const collectionState = await fetchDataWithCookieInServer(
+    `${COLLECTION_LIST_PATH}?channel_id=1005&limit=${limit}&page=${pageId}`,
+    cookieString
+  );
+  const { lists, totalpage, ...othersState } = collectionState;
+  console.log("collectionState: ", { ...othersState });
+
+  if (!isPositiveInteger(pageId) || pageId > totalpage) {
+    redirect("/collection/1");
+  }
+
+  const collectionList = lists || [];
+  //console.log("collectionList: ", collectionList);
+
   return (
-    <main className="page_body">
-       <Container className={` small`}>
-        <PageTitle>文章收藏</PageTitle>
-        <h1>文章收藏： 第 <b>{pageId}</b> 頁 </h1>
-      </Container>
-      <PageDevName>collection / {pageId}</PageDevName>
-    </main>
+    <>
+      <section className={classes["collection-list__container"]}>
+        {collectionList.map((collection, index) => (
+          <Collection key={index} data={collection} />
+        ))}
+      </section>
+      <Pagination total={totalpage}></Pagination>
+    </>
   );
 }

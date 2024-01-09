@@ -38,6 +38,10 @@ const nextConfig = {
         source: "/api/expert/:path*",
         destination: "https://lab7-health.udn.com/api/expert/:path*",
       },
+      {
+        source: "/api/collect/switch",
+        destination: "https://interactive.udn.com/api/collect/switch",
+      },
     ];
   },
 };

@@ -1,21 +1,24 @@
 "use client";
 
 import React, { useState, useEffect, Fragment } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import classes from "./ui/layout.module.scss";
 
 //
-export default function Pagination({ total: totalPage }) {
-  // const { pageId } = useParams()
-  // const { pathname } = useLocation()
-  // const navigate = useNavigate()
+export default function Pagination({ total: totalPage = 1 }) {
+  //
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const currentPath = pathname.split("/")[1];
+  const pathArray = pathname.split("/");
+  const pageId = pathArray[pathArray.length - 1];
+  const currentPathWithoutPageId = pathArray.slice(0, -1).join("/");
+  const currentPath = currentPathWithoutPageId;
+
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    // console.log('PAGINATION', collectionData)
     setPages(() => {
       const pageIdInt = parseInt(pageId);
       const pagesList = Array(totalPage)
@@ -33,34 +36,36 @@ export default function Pagination({ total: totalPage }) {
     // <Fragment> == <>, 但是可以存 key 的屬性&值 (only 'key' props )
     <Fragment>
       {totalPage && (
-        <div className="pagenation">
+        <div className={classes.pagination}>
           <button
             onClick={() => {
-              navigate(`/${currentPath}/1`);
+              router.push(`${currentPath}/1`);
             }}
-            className={`pagination__btn ${
+            className={`${classes.pagination__btn} ${
               pageId > 1 && totalPage > 1
-                ? "enable pagination__btn--first"
-                : "pagination__btn--first"
+                ? `${classes["enable"]} ${classes["pagination__btn--first"]}`
+                : classes["pagination__btn--first"]
             }`}
           >
             最前頁
           </button>
           <button
             onClick={() => {
-              navigate(`/${currentPath}/${parseInt(pageId) - 1}`);
+              router.push(`${currentPath}/${parseInt(pageId) - 1}`);
             }}
-            className={`pagination__btn ${
+            className={`${classes.pagination__btn} ${
               pageId > 1 && totalPage > 1
-                ? "pagination__btn--prev enable"
-                : "pagination__btn--prev"
+                ? `${classes["pagination__btn--prev"]} ${classes.enable}`
+                : classes["pagination__btn--prev"]
             }`}
           >
             上一頁
           </button>
-          <div className="pagination__wrapper">
+          <div className={classes.pagination__wrapper}>
             <span
-              className={`pagination--hint ${pages[0] !== 1 ? "show" : ""}`}
+              className={`${classes["pagination--hint"]} ${
+                pages[0] !== 1 ? classes.show : ""
+              }`}
             >
               ...
             </span>
@@ -68,20 +73,20 @@ export default function Pagination({ total: totalPage }) {
               <button
                 key={pageKey}
                 onClick={() => {
-                  navigate(`/${currentPath}/${page}`);
+                  router.push(`${currentPath}/${page}`);
                 }}
-                className={`pagination__number ${
-                  pageId == page ? "active" : ""
-                } ${pageKey + 1 === pages.length ? "last" : ""} ${
-                  page > 999 ? "small" : ""
+                className={`${classes.pagination__number} ${
+                  pageId == page ? classes.active : ""
+                } ${pageKey + 1 === pages.length ? classes.last : ""} ${
+                  page > 999 ? classes.small : ""
                 }`}
               >
                 {page}
               </button>
             ))}
             <span
-              className={`pagination--hint ${
-                pages[pages.length - 1] !== totalPage ? "show" : ""
+              className={`${classes["pagination--hint"]} ${
+                pages[pages.length - 1] !== totalPage ? classes.show : ""
               }`}
             >
               ...
@@ -89,29 +94,29 @@ export default function Pagination({ total: totalPage }) {
           </div>
           <button
             onClick={() => {
-              navigate(`/${currentPath}/${parseInt(pageId) + 1}`);
+              router.push(`${currentPath}/${parseInt(pageId) + 1}`);
             }}
-            className={`pagination__btn ${
+            className={`${classes.pagination__btn} ${
               pageId < totalPage && totalPage > 1
-                ? "pagination__btn--next enable"
-                : "pagination__btn--next"
+                ? `${classes["pagination__btn--next"]} ${classes.enable}`
+                : classes["pagination__btn--next"]
             }`}
           >
             下一頁
           </button>
           <button
             onClick={() => {
-              navigate(`/${currentPath}/${totalPage}`);
+              router.push(`${currentPath}/${totalPage}`);
             }}
-            className={`pagination__btn ${
+            className={`${classes.pagination__btn} ${
               pageId < totalPage && totalPage > 1
-                ? "enable pagination__btn--last"
-                : "btn pagination__btn--last"
+                ? `${classes.enable} ${classes["pagination__btn--last"]}`
+                : `${classes.btn} ${classes["pagination__btn--last"]}`
             }`}
           >
             最後頁
           </button>
-          <div className="pagination__total">
+          <div className={classes.pagination__total}>
             共 <span>{totalPage}</span> 頁
           </div>
         </div>
