@@ -49,3 +49,21 @@ changed:
 className={`${classes["card__bottom-left-round__list-item"]} ${classes["card__bottom-left-round__list-item--comparison"]} `}
  */
 ```
+
+```js
+// 這是原本的寫法
+// ${mobile} {
+//     ...
+// }
+// ${pad} {
+//     ...
+// }
+
+// 這是改寫後的寫法
+// @include mobile {
+//     ...
+// }
+// @include pad {
+//     ...
+// }
+```

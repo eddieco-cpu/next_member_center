@@ -5,14 +5,13 @@ import { redirect } from "next/navigation";
 import Pagination from "@components/Pagination";
 import Collection from "../components/Collection";
 
-import { convertCookieObjArrayToString } from "@utils/helper";
+import {
+  convertCookieObjArrayToString,
+  isPositiveInteger,
+} from "@utils/helper";
 import { fetchDataWithCookieInServer, COLLECTION_LIST_PATH } from "@utils/api";
 
 import classes from "../page.module.scss";
-
-function isPositiveInteger(value) {
-  return /^[1-9]\d*$/.test(String(value));
-}
 
 export default async function Page({ params: { pageId } }) {
   //

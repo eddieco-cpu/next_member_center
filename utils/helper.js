@@ -25,3 +25,7 @@ export function doWait(times = 200) {
     }, times * 1);
   });
 }
+
+export function isPositiveInteger(value) {
+  return /^[1-9]\d*$/.test(String(value));
+}
