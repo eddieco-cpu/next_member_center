@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 
 import Statistic from "./Statistic";
+import FeedbackMain from "./FeedbackMain";
+
 import classes from "../page.module.scss";
 
 function convertStringToObject(str) {
@@ -145,6 +147,12 @@ export default function Wrapper({
           slopeDataObj,
           setCurrentClientDataId,
         }}
+      />
+      <FeedbackMain
+        {...{ retireDataObj }}
+        {...{ currentClientDataId }}
+        {...{ clientDataArr }}
+        {...{ avgDataObj: avgDataObj.result }}
       />
     </div>
   );
