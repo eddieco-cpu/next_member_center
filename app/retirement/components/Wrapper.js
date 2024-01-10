@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import Statistic from "./Statistic";
 import FeedbackMain from "./FeedbackMain";
+import FeedbackChart from "./FeedbackChart";
 
 import classes from "../page.module.scss";
 
@@ -149,6 +150,12 @@ export default function Wrapper({
         }}
       />
       <FeedbackMain
+        {...{ retireDataObj }}
+        {...{ currentClientDataId }}
+        {...{ clientDataArr }}
+        {...{ avgDataObj: avgDataObj.result }}
+      />
+      <FeedbackChart
         {...{ retireDataObj }}
         {...{ currentClientDataId }}
         {...{ clientDataArr }}

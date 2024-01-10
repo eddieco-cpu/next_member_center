@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-import classes from "./components.module.scss";
+import classes from "./statistic.module.scss";
 
 //window.innerWidth > 740 ? 是版型的切換點
 

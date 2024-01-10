@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import classes from "./components.module.scss";
+import classes from "./feedbackMain.module.scss";
 
 export default function FeedbackMain({
   retireDataObj,
