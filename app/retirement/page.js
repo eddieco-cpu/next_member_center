@@ -32,28 +32,29 @@ export default async function Page() {
     "https://lab7-health.udn.com/api/retire",
     cookieString
   );
-  //刪除 cookie 後，重新導向
   if (!clientResultDataAndSlopeData) {
-    redirect("/login");
+    redirect("/login"); //刪除 cookie，重新導向
   }
 
   //fetch 2. -> data for description
-  const retirementDataObj = await fetchData(
+  const retireDataObj = await fetchData(
     "https://lab7-health.udn.com/retire.json"
   );
-  if (!clientResultDataAndSlopeData) redirect("/user");
+  if (!retireDataObj) redirect("/user");
 
   //fetch 3. -> data for all client's average
   const avgDataObj = await fetchData(
     "https://lab7-health.udn.com/api/retire/data"
   );
-  if (!clientResultDataAndSlopeData) redirect("/user");
+  if (!avgDataObj) redirect("/user");
 
   return (
     <main className={`page_body`}>
       <Container className={`small ${classes.retirement}`}>
         <PageTitle>退休力檢測</PageTitle>
-        <Wrapper />
+        <Wrapper
+          {...{ retireDataObj, avgDataObj, clientResultDataAndSlopeData }}
+        />
       </Container>
       <PageDevName>retirement</PageDevName>
     </main>

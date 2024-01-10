@@ -51,6 +51,7 @@ className={`${classes["card__bottom-left-round__list-item"]} ${classes["card__bo
 ```
 
 ```js
+// 幫我改寫 style
 // 這是原本的寫法
 // ${mobile} {
 //     ...
