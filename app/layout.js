@@ -29,8 +29,14 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           type="text/css"
         />
-        <link rel="stylesheet" href="/health/css/output_style.css"></link>
-        <link rel="stylesheet" href="/health/css/health-modal.css"></link>
+        <link
+          rel="stylesheet"
+          href="/member/health/css/output_style.css"
+        ></link>
+        <link
+          rel="stylesheet"
+          href="/member/health/css/health-modal.css"
+        ></link>
       </head>
       <body>
         <Header />

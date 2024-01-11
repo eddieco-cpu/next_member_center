@@ -6,8 +6,8 @@ import { HeaderContext } from "@contexts/headerContext";
 
 function injectionScript(callback) {
   const navMenu = document?.getElementsByClassName("nav-menu")[0];
-  const fullMenu =
-    document?.getElementsByClassName("search-menu")[0]?.children[0];
+  const fullMenu = document?.getElementsByClassName("search-menu")[0]
+    ?.children[0];
   const closeBtn = document?.getElementsByClassName("close-btn")[0];
   const searchBtn = document.querySelector(".btn-search");
   const searchInput = document.querySelector(".input-holder input");
@@ -47,7 +47,10 @@ const OverLayMenu = () => {
 
     async function fetchData() {
       const res = await fetch(
-        "http://localhost:3006/udn/api/line3?channelId=1005"
+        // process.env.DOMAIN +
+        //   process.env.BASE_PATH +
+        //   `/udn/api/line3?channelId=1005`,
+        `http://localhost:3006/member/udn/api/line3?channelId=1005`
       );
       const data = await res.json();
       //console.log(data);

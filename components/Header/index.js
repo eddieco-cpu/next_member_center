@@ -16,7 +16,7 @@ export default function Header() {
           <div className={classes.logo}>
             <a href="https://udn.com" className={classes["logo-udn"]}>
               <Image
-                src="/logo-udn.svg"
+                src={`${process.env.BASE_PATH}/logo-udn.svg`}
                 alt="回聯合新聞網首頁"
                 width={41}
                 height={36.5}
@@ -24,7 +24,7 @@ export default function Header() {
             </a>
             <a href="/health/index" className={classes["logo-health"]}>
               <Image
-                src="/logo-health.svg"
+                src={`${process.env.BASE_PATH}/logo-health.svg`}
                 alt="回元氣網首頁"
                 width={89}
                 height={43.5}
