@@ -1,4 +1,4 @@
-import classes from "../author/1005/[track_id]/page.module.scss";
+import classes from "@track/page.module.scss";
 
 export default function CourseCard(props) {
   return (

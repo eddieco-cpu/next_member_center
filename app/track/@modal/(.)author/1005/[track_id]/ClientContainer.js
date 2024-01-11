@@ -5,13 +5,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { fetchData } from "@utils/api";
 import PopupFrame from "@components/ui/PopupFrame";
 
-import classes from "../../../../author/1005/[track_id]/page.module.scss";
+import classes from "@track/page.module.scss";
 
-import Avater from "../../../../components/Avater";
-import CourseCard from "../../../../components/CourseCard";
-import SessionCard from "../../../../components/SessionCard";
-import ArticleCard from "../../../../components/ArticleCard";
-import GetMoreViaClient from "../../../../components/GetMoreViaClient";
+import Avater from "@track/components/Avater";
+import CourseCard from "@track/components/CourseCard";
+import SessionCard from "@track/components/SessionCard";
+import ArticleCard from "@track/components/ArticleCard";
+import GetMoreViaClient from "@track/components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
 
 export default function ClientContainer({ track_id, tracklist }) {

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import { PageTitle, Container } from "@components/ui/Layout";
 import PageDevName from "@components/ui/PageDevName";
-import classes from "./page.module.scss";
+import classes from "@track/page.module.scss";
 
 import { convertCookieObjArrayToString } from "@utils/helper";
 import {
@@ -14,11 +14,11 @@ import {
   TRACK_STATE,
 } from "@utils/api";
 
-import Avater from "../../../components/Avater";
-import CourseCard from "../../../components/CourseCard";
-import SessionCard from "../../../components/SessionCard";
-import ArticleCard from "../../../components/ArticleCard";
-import GetMoreViaClient from "../../../components/GetMoreViaClient";
+import Avater from "@track/components/Avater";
+import CourseCard from "@track/components/CourseCard";
+import SessionCard from "@track/components/SessionCard";
+import ArticleCard from "@track/components/ArticleCard";
+import GetMoreViaClient from "@track/components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
 
 export default async function Page({ params }) {

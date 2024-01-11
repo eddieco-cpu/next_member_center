@@ -2,7 +2,7 @@
 
 import React from "react";
 import { postData, postForm } from "@utils/api";
-import classes from "../page.module.scss";
+import classes from "@track/page.module.scss";
 
 function checkUnSubscribe() {
   return new Promise((resolve) => {

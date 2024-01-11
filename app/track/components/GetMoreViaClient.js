@@ -9,7 +9,7 @@ import ShowMore from "./ShowMore";
 import { getData } from "@utils/api";
 import { doWait } from "@utils/helper";
 
-import classes from "../author/1005/[track_id]/page.module.scss";
+import classes from "@track/page.module.scss";
 
 export default function GetMoreViaClient({
   id,

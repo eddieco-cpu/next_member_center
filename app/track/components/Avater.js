@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 import React, { useState } from "react";
-import classes from "../page.module.scss";
+import classes from "@track/page.module.scss";
 import SubscribeButton from "./SubscribeButton";
 
 export default function Avater(props) {
