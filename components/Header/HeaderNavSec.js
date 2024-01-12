@@ -3,12 +3,13 @@
 import { usePathname } from "next/navigation";
 import React from "react";
 
+import { BASE_PATH } from "@utils/api";
 import { headerNav, regex } from "./HeaderNav";
 import HeaderNavItem from "./HeaderNavItem";
 import classes from "./index.module.scss";
 
 export default function HeaderNavSec() {
-  const pathname = usePathname();
+  const pathname = usePathname().toString().replace(BASE_PATH, "");
   const nav =
     headerNav.find((nav) => pathname.startsWith(nav.link)) ||
     (pathname.startsWith("/track")
@@ -22,9 +23,10 @@ export default function HeaderNavSec() {
           <HeaderNavItem
             key={index}
             href={
-              regex.test(secLink)
+              BASE_PATH +
+              (regex.test(secLink)
                 ? secLink.replace(regex, "")
-                : nav.link + secLink
+                : nav.link + secLink)
             }
             className={classes.nav__sublink}
             classNameActiveDep={

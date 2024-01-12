@@ -1,6 +1,7 @@
 "use client";
 import { use, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { BASE_PATH } from "@/utils/api";
 
 import { fetchData } from "@utils/api";
 import PopupFrame from "@components/ui/PopupFrame";
@@ -39,7 +40,7 @@ export default function ClientContainer({ track_id, tracklist }) {
         tracklist.length) %
       tracklist.length;
     const prevTrack = tracklist[prevTrackIndex];
-    router.replace(`/track/author/1005/${prevTrack.track_id}`);
+    router.replace(`${BASE_PATH}/track/author/1005/${prevTrack.track_id}`);
   };
   const onToggleNext = () => {
     if (tracklist.length <= 1) return;
@@ -47,7 +48,7 @@ export default function ClientContainer({ track_id, tracklist }) {
       (tracklist.findIndex((el) => el.track_id == track_id) + 1) %
       tracklist.length;
     const nextTrack = tracklist[nextTrackIndex];
-    router.replace(`/track/author/1005/${nextTrack.track_id}`);
+    router.replace(`${BASE_PATH}/track/author/1005/${nextTrack.track_id}`);
   };
 
   return (

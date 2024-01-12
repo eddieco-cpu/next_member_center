@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BASE_PATH } from "@/utils/api";
 
 import { Container } from "@components/ui/Layout";
 import PageDevName from "@components/ui/PageDevName";
@@ -22,6 +23,7 @@ export default function Login({ searchParams: params }) {
           <div className={classes.login__header}>
             <Link
               href={
+                BASE_PATH +
                 "/login?" +
                 new URLSearchParams({
                   ...params,
@@ -36,6 +38,7 @@ export default function Login({ searchParams: params }) {
             </Link>
             <Link
               href={
+                BASE_PATH +
                 "/login?" +
                 new URLSearchParams({
                   ...params,

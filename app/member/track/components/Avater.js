@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { BASE_PATH } from "@/utils/api";
 
 import React, { useState } from "react";
 import classes from "@track/page.module.scss";
@@ -29,7 +30,7 @@ export default function Avater(props) {
         )}
         <Link
           // to={`/track/author/1005/${props.track_id}`}
-          href={`/track/author/1005/${props.track_id}`}
+          href={`${BASE_PATH}/track/author/1005/${props.track_id}`}
           scroll={false}
           className={`${classes["circle-pic-item__substance"]} ${
             props.needSpecialist &&

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { BASE_PATH } from "@/utils/api";
 import { useRouter, useSearchParams } from "next/navigation";
 import { parse, stringify } from "querystring";
 import cookies from "js-cookie";
@@ -402,8 +403,8 @@ export default function FormLogin() {
           <label htmlFor="rememberAccount">記住我的帳號</label>
         </CheckboxInput>
         <div className={classes["login__setting--right"]}>
-          <Link href="/order">忘記密碼</Link>
-          <Link href="/orders">重寄啟用信</Link>
+          <Link href={BASE_PATH + "/order"}>忘記密碼</Link>
+          <Link href={BASE_PATH + "/orders"}>重寄啟用信</Link>
         </div>
       </div>
       <div className={classes.login__button__wrapper}>

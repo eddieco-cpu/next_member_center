@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
+import { BASE_PATH } from "@/utils/api";
 
 export default function Page() {
-  redirect("/collection/1");
+  redirect(BASE_PATH + "/collection/1");
   return null;
 }

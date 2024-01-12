@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BASE_PATH } from "@utils/api";
 
 import React from "react";
 import classes from "./index.module.scss";
@@ -13,7 +14,7 @@ export default function HeaderNavItem({
   ActiveExactMatch,
   ...props
 }) {
-  const pathname = usePathname();
+  const pathname = usePathname().toString().replace(BASE_PATH, "");
 
   return (
     <>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { BASE_PATH } from "@/utils/api";
 
 import { PageTitle, Container } from "@components/ui/Layout";
 import PageDevName from "@components/ui/PageDevName";
@@ -63,7 +64,7 @@ export default async function Page({ params }) {
       <Container className={` small ${classes.track__wrapper}`}>
         <div className={classes.author__container}>
           {/* ===============  back to track list page ================ */}
-          <Link href={`/track`} className={classes.linker}>
+          <Link href={`${BASE_PATH}/track`} className={classes.linker}>
             <i className="i-arrow7-left"></i>
             回列表頁
           </Link>

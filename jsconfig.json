@@ -7,7 +7,7 @@
       "@utils/*": ["./utils/*"],
       "@styles/*": ["./app/styles/*"],
 
-      "@track/*": ["./app/track/*"],
+      "@track/*": ["./app/member/track/*"],
     }
   }
 }

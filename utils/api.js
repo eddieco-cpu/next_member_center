@@ -6,6 +6,8 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+export const BASE_PATH = "/member";
+
 export function postForm(url, data) {
   //post without cookie
   //

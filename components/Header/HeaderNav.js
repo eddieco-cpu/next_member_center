@@ -2,6 +2,7 @@ import Link from "next/link";
 import classes from "./index.module.scss";
 import HeaderNavItem from "./HeaderNavItem";
 import HeaderNavSec from "./HeaderNavSec";
+import { BASE_PATH } from "@utils/api";
 
 export const regex = /^##/; // 正則表達式檢查  是否以特定符號開頭（在這裡是 '##'）
 export const headerNav = [
@@ -70,7 +71,7 @@ export default function HeaderNav() {
         {headerNav.map((nav, index) => (
           <li key={index} className={classes.nav__link__wrapper + " "}>
             <HeaderNavItem
-              href={nav.link}
+              href={BASE_PATH + nav.link}
               className={classes.nav__link}
               classNameActiveDep={nav.link}
               ActiveExactMatch={false}
@@ -84,9 +85,10 @@ export default function HeaderNav() {
                   <HeaderNavItem
                     key={index}
                     href={
-                      regex.test(secLink)
+                      BASE_PATH +
+                      (regex.test(secLink)
                         ? secLink.replace(regex, "")
-                        : nav.link + secLink
+                        : nav.link + secLink)
                     }
                     className={classes.nav__sublink}
                     classNameActiveDep={
