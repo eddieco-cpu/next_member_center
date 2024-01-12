@@ -7,9 +7,7 @@ export default async function Footer() {
     //const { data } = await getData(FOOTER);
 
     //方法二
-    const res = await fetch(
-      "http://localhost:3006/member/health/api/member/component"
-    );
+    const res = await fetch(FOOTER);
     data = await res.json();
 
     //console.log("data.footer", data.footer);

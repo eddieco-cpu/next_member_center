@@ -7,6 +7,8 @@ import { postForm } from "@utils/api.js";
 
 import { getRecaptcha } from "@components/ReCaptcha";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 function LoginForm() {
   //
   async function testRecaptcha() {
@@ -30,7 +32,7 @@ function LoginForm() {
 
     try {
       const { data } = await postForm(
-        "/do/member/wbs/MemberEmailLogin", //交給 proxy 處理 CORS
+        BASE_PATH + "/do/member/wbs/MemberEmailLogin", //交給 proxy 處理 CORS
         formData
       );
       console.log("login data: ", data);

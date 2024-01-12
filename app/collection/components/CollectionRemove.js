@@ -11,12 +11,13 @@ import classes from "../page.module.scss";
 import React, { useCallback } from "react";
 
 import { COLLECTION_REMOVE_PATH } from "@utils/api";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 async function removeCollection(collectionId) {
   //
   const { data } = await axiosInstance({
     method: "POST",
-    url: COLLECTION_REMOVE_PATH,
+    url: BASE_PATH + COLLECTION_REMOVE_PATH,
     data: {
       channel_id: 1005,
       id: collectionId,

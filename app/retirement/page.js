@@ -9,7 +9,13 @@ import classes from "./page.module.scss";
 import Wrapper from "./components/Wrapper";
 
 import { convertCookieObjArrayToString } from "@utils/helper";
-import { fetchDataWithCookieInServer, fetchData } from "@utils/api";
+import {
+  fetchDataWithCookieInServer,
+  fetchData,
+  RETIRE_CLIENT_DATA,
+  RETIRE_DESCRIPTION,
+  RETIRE_AVG_DATA,
+} from "@utils/api";
 
 export default async function Page() {
   //
@@ -29,7 +35,7 @@ export default async function Page() {
 
   //fetch 1. -> client data of retirement test (result and slope)
   const clientResultDataAndSlopeData = await fetchDataWithCookieInServer(
-    "https://lab7-health.udn.com/api/retire",
+    RETIRE_CLIENT_DATA,
     cookieString
   );
   if (!clientResultDataAndSlopeData) {
@@ -37,15 +43,11 @@ export default async function Page() {
   }
 
   //fetch 2. -> data for description
-  const retireDataObj = await fetchData(
-    "https://lab7-health.udn.com/retire.json"
-  );
+  const retireDataObj = await fetchData(RETIRE_DESCRIPTION);
   if (!retireDataObj) redirect("/user");
 
   //fetch 3. -> data for all client's average
-  const avgDataObj = await fetchData(
-    "https://lab7-health.udn.com/api/retire/data"
-  );
+  const avgDataObj = await fetchData(RETIRE_AVG_DATA);
   if (!avgDataObj) redirect("/user");
 
   return (

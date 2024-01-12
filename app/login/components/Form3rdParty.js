@@ -6,6 +6,8 @@ import React from "react";
 import { Btn } from "@components/ui/Layout";
 import classes from "../page.module.scss";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function Form3rdParty() {
   //
   const params = useSearchParams();
@@ -20,19 +22,19 @@ export default function Form3rdParty() {
       <Btn
         className={`${classes.login__button} ${classes["login__button--fb"]}`}
       >
-        <img src="/fb.png" alt={`Facebook ${loginWord()}`} />
+        <img src={`${BASE_PATH}/fb.png`} alt={`Facebook ${loginWord()}`} />
         Facebook {loginWord()}
       </Btn>
       <Btn
         className={`${classes.login__button} ${classes["login__button--google"]}`}
       >
-        <img src="/google.png" alt={`Google ${loginWord()}`} />
+        <img src={`${BASE_PATH}/google.png`} alt={`Google ${loginWord()}`} />
         Google {loginWord()}
       </Btn>
       <Btn
         className={`${classes.login__button} ${classes["login__button--apple"]}`}
       >
-        <img src="/apple.png" alt={`Apple ${loginWord()}`} />
+        <img src={`${BASE_PATH}/apple.png`} alt={`Apple ${loginWord()}`} />
         AppleID {loginWord()}
       </Btn>
     </>

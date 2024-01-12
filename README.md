@@ -68,3 +68,57 @@ className={`${classes["card__bottom-left-round__list-item"]} ${classes["card__bo
 //     ...
 // }
 ```
+
+```js
+//basePath 筆記
+/**
+ * 1. 這是 next.js 的設定，用來設定專案的根目錄
+ * 2. 這個設定會影響到：
+ *   1. 你的專案的路由
+ *   2. 你的專案的靜態檔案的路徑
+ *   3. 你的專案的 api 的路徑
+ *
+ * 3. 設定位置： next.config.js (同 rewrites 寫 proxy 的設定位置)
+ * 4. 結論：
+ *  1. 設定 basePath 後，所有只要是有經過自己 server 的呼叫請求，都會被加上 basePath
+ *  2. 因此，此時需要搭配 .env 檔案來設計
+ *     (不但是為了 next.config.js 本身的設定，也是為了其他地方呼叫 basePath 的設定)
+ */
+
+/**
+ * .env 設定
+ * 1. 不用特別加 ""
+ * 2. process.env.[variable] 可以直接取得 .env 裡面的值
+ * 3. Next.js will automatically expand variables that use $ to reference other variables
+ * e.g.
+ * TWITTER_USER=nextjs
+ * TWITTER_URL=https://twitter.com/$TWITTER_USER
+ *
+ * 4. Non-"NEXT_PUBLIC_" environment variables are only available in the Node.js environment
+ */
+
+/** 
+ * 提醒：什麼情況下，不用理 basePath
+ * 
+ * 只要在 server components 呼叫的 api
+ * 可以直接忽略被預設的 cors 問題，
+ * 僅專注在 api 本身的要求上即可。
+
+ * 因為，忽略了 cors 的問題因此不用寫跨域的設定 (proxy)
+ * 同時，因為不寫 proxy (不從自己的 server 出發，而是直接呼叫對方的 api url)
+ * 所以，可以忽略 basePath 設定後，帶來的調整麻煩。
+ * 
+ * 而，需要寫 proxy 的，就需要處理 basePath !!
+ * e.g. 
+ * {
+ *    source: "/udn/api/:path*",
+ *    destination: "https://udn.com/api/:path*",
+ *  },
+ * await fetch(`${ROOT}${BASE_PATH}/udn/api/line3?channelId=1005`) 
+ * in OverLayMenu
+ * 
+*/
+```
+
+```js
+```

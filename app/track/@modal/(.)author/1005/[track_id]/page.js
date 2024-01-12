@@ -27,9 +27,12 @@ export default async function page({ params: { track_id } }) {
   );
   const tracklist = trackState?.list || [];
 
+  console.log("@@@@@ parallal @@@@")
+
   return (
     <>
-      <ClientContainer {...{ track_id, tracklist }}></ClientContainer>
+      <div>@@@@@@</div>
+      {/* <ClientContainer {...{ track_id, tracklist }}></ClientContainer> */}
     </>
   );
 }

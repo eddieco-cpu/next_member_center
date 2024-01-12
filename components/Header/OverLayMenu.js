@@ -4,6 +4,9 @@ import React, { useContext, useState, useEffect } from "react";
 
 import { HeaderContext } from "@contexts/headerContext";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+const ROOT = process.env.NEXT_PUBLIC_ROOT;
+
 function injectionScript(callback) {
   const navMenu = document?.getElementsByClassName("nav-menu")[0];
   const fullMenu = document?.getElementsByClassName("search-menu")[0]
@@ -47,10 +50,7 @@ const OverLayMenu = () => {
 
     async function fetchData() {
       const res = await fetch(
-        // process.env.DOMAIN +
-        //   process.env.BASE_PATH +
-        //   `/udn/api/line3?channelId=1005`,
-        `http://localhost:3006/member/udn/api/line3?channelId=1005`
+        `${ROOT}${BASE_PATH}/udn/api/line3?channelId=1005`
       );
       const data = await res.json();
       //console.log(data);
