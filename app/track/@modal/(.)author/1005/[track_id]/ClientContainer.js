@@ -2,7 +2,7 @@
 import { use, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { fetchData } from "@utils/api";
+import { fetchData, TRACK_EXPERT } from "@utils/api";
 import PopupFrame from "@components/ui/PopupFrame";
 
 import classes from "@track/page.module.scss";
@@ -14,6 +14,8 @@ import ArticleCard from "@track/components/ArticleCard";
 import GetMoreViaClient from "@track/components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export default function ClientContainer({ track_id, tracklist }) {
   //
   const router = useRouter();
@@ -22,7 +24,7 @@ export default function ClientContainer({ track_id, tracklist }) {
   useEffect(() => {
     async function doFetchData() {
       const fetchedTrackData = await fetchData(
-        `/api/track/expert?author_id=${track_id}&per_page=6`
+        `${BASE_PATH}${TRACK_EXPERT}?author_id=${track_id}&per_page=6`
       );
       setTrackData(fetchedTrackData);
     }

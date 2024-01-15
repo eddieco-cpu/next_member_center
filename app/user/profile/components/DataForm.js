@@ -4,6 +4,7 @@ import cookies from "js-cookie";
 
 import { getRecaptcha } from "@components/ReCaptcha";
 import { postForm } from "@utils/api";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 import { TextInput, Btn } from "@components/ui/Layout";
 import { taiwanAreaData } from "@/utils/address.js";
@@ -16,17 +17,17 @@ let thirdparty = [
   {
     id: "facebook",
     depandcy: "facebook_bind",
-    img: "/fb2.svg",
+    img: BASE_PATH + "/fb2.svg",
   },
   {
     id: "google",
     depandcy: "google_bind",
-    img: "/google2.svg",
+    img: BASE_PATH + "/google2.svg",
   },
   {
     id: "apple",
     depandcy: "apple_bind",
-    img: "/apple2.svg",
+    img: BASE_PATH + "/apple2.svg",
   },
 ];
 
@@ -51,9 +52,9 @@ async function queryMemberData() {
   try {
     const { data } = await postForm(
       //1.
-      "/do/member/wbs/MemberDataQuery", //ok
+      BASE_PATH + "/do/member/wbs/MemberDataQuery", //ok
       //2.
-      //loginDomain + "/do/health/api/member/query",	//fail
+      //loginDomain + BASE_PATH + "/do/health/api/member/query",	//fail
       formData
     );
     console.log("queryMember data: ", data);
@@ -67,7 +68,9 @@ async function queryMemberData() {
 function VerifyEmblem(props) {
   return (
     <div className={`${classes["row--verify-state"]}`}>
-      <img src={props.condition ? "/is_bind.svg" : "/no_bind.svg"} />
+      <img
+        src={BASE_PATH + (props.condition ? "/is_bind.svg" : "/no_bind.svg")}
+      />
       <b
         style={{
           color: props.condition ? "#218431" : "#666",

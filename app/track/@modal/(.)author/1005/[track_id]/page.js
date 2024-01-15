@@ -27,9 +27,13 @@ export default async function page({ params: { track_id } }) {
   );
   const tracklist = trackState?.list || [];
 
+  console.log("@@@@@ parallal @@@@")
+
   return (
     <>
-      <ClientContainer {...{ track_id, tracklist }}></ClientContainer>
+      <div>@@@@@@</div> 
+      {/* 目前還無解，basePath 與 parallel 衝突，等待官方上線 14.0.5 */}
+      {/* <ClientContainer {...{ track_id, tracklist }}></ClientContainer> */}
     </>
   );
 }

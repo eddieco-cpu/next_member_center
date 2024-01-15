@@ -2,22 +2,25 @@
 
 import { getData } from "@utils/api";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
+const ROOT = process.env.NEXT_PUBLIC_ROOT;
+
 //
 async function addOneCookies() {
-  const { data } = await getData("http://localhost:3006/api/try/cookies/add");
+  const { data } = await getData(BASE_PATH + "/api/try/cookies/add");
   console.log("data: ", data);
 }
 
 async function readAllCookies() {
   const { data } = await getData(
-    "http://localhost:3006/api/try/cookies/read/all"
+    ROOT + BASE_PATH + "/api/try/cookies/read/all"
   );
   console.log("data: ", data);
 }
 
 async function readOneCookie() {
   const { data } = await getData(
-    "http://localhost:3006/api/try/cookies/read/rightNowCookie"
+    ROOT + BASE_PATH + "/api/try/cookies/read/rightNowCookie"
   );
   console.log("data: ", data);
 }

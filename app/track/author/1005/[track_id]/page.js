@@ -12,6 +12,7 @@ import {
   fetchDataWithCookieInServer,
   fetchData,
   TRACK_STATE,
+  TRACK_EXPERT,
 } from "@utils/api";
 
 import Avater from "@track/components/Avater";
@@ -20,6 +21,8 @@ import SessionCard from "@track/components/SessionCard";
 import ArticleCard from "@track/components/ArticleCard";
 import GetMoreViaClient from "@track/components/GetMoreViaClient";
 import { ThemeTitle } from "@components/ui/Layout";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 export default async function Page({ params }) {
   //
@@ -53,9 +56,9 @@ export default async function Page({ params }) {
 
   //
   const trackData = await fetchData(
-    `http://localhost:3006/api/track/expert?author_id=${params.track_id}&per_page=6`
+    `https://lab7-health.udn.com/api/track/expert?author_id=${params.track_id}&per_page=6`
   );
-  console.log("trackData: ", trackData);
+  //console.log("trackData: ", trackData);
 
   //
   return (

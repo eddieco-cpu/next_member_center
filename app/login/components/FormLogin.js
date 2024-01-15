@@ -11,7 +11,14 @@ import classes from "../page.module.scss";
 import { Btn, CheckboxInput, TextInput } from "@components/ui/Layout";
 import Form3rdParty from "./Form3rdParty";
 
-import { postForm, getData } from "@utils/api";
+import {
+  postForm,
+  getData,
+  MEMBER_MOBILE_LOGIN,
+  MEMBER_EMAIL_LOGIN,
+  MEMBER_MOBILE_SEND_CONFIRM,
+  MEMBER_TEACHIFY,
+} from "@utils/api";
 import { redirectHandler } from "@utils/helper";
 import { emailValidator, mobileNumberValidator } from "@utils/validator";
 
@@ -23,6 +30,8 @@ import {
   getHasAccessToCourseSyntax,
   registerTeachifyUserSyntax,
 } from "@utils/graphqlSyntax";
+
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 //
 export default function FormLogin() {
@@ -167,12 +176,12 @@ export default function FormLogin() {
 
   async function getTeachifyLoginData() {
     //
-    let url = "/api/member/teachify";
+    let url = MEMBER_TEACHIFY; //"/api/member/teachify";
     // process.env.NODE_ENV === 'development'
     //   ? `${TEACHIFY_AUTH}?account=${memberData.account}`   //memberData 來自 func 參數
     //   : TEACHIFY_AUTH //--> /api/member/teachify   //to be continued
 
-    const res = await getData(url, { auth: true });
+    const res = await getData(BASE_PATH + url, { auth: true });
     const { data } = res;
     window.authData = res;
 
@@ -253,11 +262,11 @@ export default function FormLogin() {
     switch (true) {
       case mobileNumberValidator(acc):
         handler.validator = "mobile";
-        handler.address = "/do/member/wbs/MemberMobileLogin";
+        handler.address = MEMBER_MOBILE_LOGIN;
         break;
       case emailValidator(acc):
         handler.validator = "email";
-        handler.address = "/do/member/wbs/MemberEmailLogin";
+        handler.address = MEMBER_EMAIL_LOGIN;
         break;
       default:
         HealthModal.alert({
@@ -288,7 +297,7 @@ export default function FormLogin() {
     let data = null;
     try {
       const { data: feedbackData } = await postForm(
-        handler.address, //交給 proxy 處理 CORS
+        BASE_PATH + handler.address, //交給 proxy 處理 CORS
         formData
       );
       console.log("login data: ", feedbackData);
@@ -320,7 +329,7 @@ export default function FormLogin() {
             };
 
             const { data: resendData } = await postForm(
-              "/do/member/wbs/MemberMobileSendConfirm", //PHONE_CodeResend,
+              BASE_PATH + MEMBER_MOBILE_SEND_CONFIRM, //PHONE_CodeResend,
               resendFormData
             );
 
