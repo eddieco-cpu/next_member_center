@@ -31,7 +31,8 @@ export default async function page({ params: { track_id } }) {
 
   return (
     <>
-      <div>@@@@@@</div>
+      <div>@@@@@@</div> 
+      {/* 目前還無解，basePath 與 parallel 衝突，等待官方上線 14.0.5 */}
       {/* <ClientContainer {...{ track_id, tracklist }}></ClientContainer> */}
     </>
   );

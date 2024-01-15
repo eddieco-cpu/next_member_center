@@ -9,7 +9,6 @@ import { convertCookieObjArrayToString } from "@utils/helper";
 import { fetchDataWithCookieInServer, TRACK_STATE } from "@utils/api";
 
 import Avater from "./components/Avater";
-import Link from "next/link";
 
 export default async function Page() {
   //
@@ -42,7 +41,6 @@ export default async function Page() {
     <main className="page_body">
       <Container className={` small ${classes.track__wrapper}`}>
         <PageTitle>您正在追蹤的專家</PageTitle>
-        <Link href={"/track/xxxx"}>xxxx</Link>
         <div className={classes.track__container}>
           <ul className={classes.lineup__group}>
             {tracklist.map((el) => (

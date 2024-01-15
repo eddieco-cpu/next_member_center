@@ -7,7 +7,7 @@ const ROOT = process.env.NEXT_PUBLIC_ROOT;
 
 //
 async function addOneCookies() {
-  const { data } = await getData(ROOT + BASE_PATH + "/api/try/cookies/add");
+  const { data } = await getData(BASE_PATH + "/api/try/cookies/add");
   console.log("data: ", data);
 }
 
