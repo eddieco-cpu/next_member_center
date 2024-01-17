@@ -352,10 +352,10 @@
     &-btn {
       color: var(--black);
       margin-right: 0;
-      pointer-events: none;
 
       @include pad {
         display: none;
+        pointer-events: none;
       }
     }
 
@@ -380,9 +380,24 @@
       transition: transform 0.2s cubic-bezier(0.5, -0.1, 0.2, 1);
       font-size: 15px;
 
+      &--bg {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        //background-color: rgba(0, 0, 0, 0.05);
+        z-index: 3;
+      }
+
       &.show {
         transform: scale(1);
         transition-timing-function: cubic-bezier(0, -0.5, 0, 1.5);
+
+        &+.member__wrapper--bg {
+          display: block;
+        }
 
         @include mobile {
           transform: scale(1) translateX(-50%);
@@ -410,6 +425,8 @@
         padding: 20px;
         border-bottom: 1px solid #c0bfbd;
         transition: background-color 0.25s ease;
+        font-weight: 200;
+        letter-spacing: 1px;
         cursor: pointer;
 
         @include mobile {
@@ -421,7 +438,7 @@
         }
 
         &:hover {
-          background-color: darken($color: white, $amount: 0.05); //${darken(white, 0.05)};
+          background-color: darken($color: #f3f3f3, $amount: 0.05); //${darken(white, 0.05)};
           color: #000;
         }
 
