@@ -41,6 +41,7 @@ export default function FormLogin() {
   const redirect = searchParams.get("redirect");
 
   //
+  const [isComponentLoading, setIsComponentLoading] = useState(false);
   const [rememberAcc, setRememberAcc] = useState(false);
   const [pw, setPw] = useState("");
   const [acc, setAcc] = useState("");
@@ -246,6 +247,8 @@ export default function FormLogin() {
   //
   async function handleLogin() {
     //
+    setIsComponentLoading(true);
+    //
     if (!acc || !pw) {
       return HealthModal.alert({
         title: "錯誤",
@@ -416,7 +419,13 @@ export default function FormLogin() {
         </div>
       </div>
       <div className={classes.login__button__wrapper}>
-        <Btn className={classes.login__button} onClick={handleLogin}>
+        <Btn
+          className={
+            classes.login__button +
+            (isComponentLoading ? ` ${classes["login__button--loading"]}` : "")
+          }
+          onClick={handleLogin}
+        >
           登入
         </Btn>
         <Form3rdParty />

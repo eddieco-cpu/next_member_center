@@ -54,6 +54,7 @@ const GlobalProvider = ({ children }) => {
         title: "",
         text: "確認登出嗎？",
         callback: () => {
+          setIsLoading(true);
           forcedLogout();
           resolve(true);
         },

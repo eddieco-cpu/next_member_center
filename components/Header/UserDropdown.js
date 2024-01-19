@@ -10,7 +10,7 @@ import classes from "./index.module.scss";
 
 export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
   //
-  const { logout } = useContext(GlobalContext);
+  const { logout, setIsLoading } = useContext(GlobalContext);
   const router = useRouter();
 
   /**
@@ -34,6 +34,7 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
     if (isDidLogout) {
       router.push("/login?action=login");
     }
+    setIsLoading(false);
     setIsMemberOpen(false);
   }
 
