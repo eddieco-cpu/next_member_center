@@ -1,13 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import { GlobalContext } from "@contexts/globalContext";
 import Link from "next/link";
 import cookies from "js-cookie";
 import classes from "./index.module.scss";
 
 export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
   //
-  const [isClient, setIsClient] = useState(false); //https://nextjs.org/docs/messages/react-hydration-error
+  const { logout } = useContext(GlobalContext);
+  const router = useRouter();
+
+  const [hasLogin] = useState(
+    cookies.get("udnmember") &&
+      cookies.get("udnland") &&
+      cookies.get("udngold") &&
+      cookies.get("um2")
+  );
+
   /**
    * While rendering your application, there was a difference between the React tree
    * that was pre-rendered from the server and the React tree that was rendered
@@ -17,16 +29,18 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
    * Ensure that the component renders the same content server-side as it does during the initial client-side render
    * to prevent a hydration mismatch
    */
-
-  const [hasLogin] = useState(
-    cookies.get("udnmember") &&
-      cookies.get("udnland") &&
-      cookies.get("udngold") &&
-      cookies.get("um2")
-  );
+  const [isClient, setIsClient] = useState(false); //https://nextjs.org/docs/messages/react-hydration-error
+  
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  async function handleLogout (e) {
+    e.preventDefault();
+    const isDidLogout = await logout();
+    setIsMemberOpen(false);
+    router.push("/login?action=login");
+  }
 
   //
   if (!isClient) {
@@ -70,11 +84,7 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
               <span>常見問題</span>
             </a>
             <a
-              onClick={(e) => {
-                e.preventDefault();
-                //logout();
-                setIsMemberOpen(false);
-              }}
+              onClick={(e) => handleLogout(e)}
               className={`${classes["member__wrapper-items"]}`}
               href="#"
             >

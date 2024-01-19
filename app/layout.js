@@ -2,6 +2,7 @@ import Header from "@components/Header";
 import Footer from "@components/Footer";
 import ReCaptcha from "@/components/ReCaptcha";
 import GraphqlProvider from "@/components/GraphqlProvider";
+import GlobalProvider from "@/contexts/globalContext";
 import "./styles/globals.scss";
 
 export const metadata = {
@@ -41,8 +42,10 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <body>
-        <Header />
-        <GraphqlProvider>{children}</GraphqlProvider>
+        <GlobalProvider>
+          <Header />
+          <GraphqlProvider>{children}</GraphqlProvider>
+        </GlobalProvider>
         <Footer />
         <ReCaptcha />
         <script src="https://health.udn.com/js/health-modal.js"></script>

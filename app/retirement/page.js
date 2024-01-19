@@ -34,21 +34,38 @@ export default async function Page() {
   ]);
 
   //fetch 1. -> client data of retirement test (result and slope)
-  const clientResultDataAndSlopeData = await fetchDataWithCookieInServer(
-    RETIRE_CLIENT_DATA,
-    cookieString
-  );
-  if (!clientResultDataAndSlopeData) {
-    redirect("/login"); //刪除 cookie，重新導向
+  var clientResultDataAndSlopeData = null;
+  try {
+    clientResultDataAndSlopeData = await fetchDataWithCookieInServer(
+      RETIRE_CLIENT_DATA,
+      cookieString
+    );
+    if (!clientResultDataAndSlopeData) throw new Error("fetch error");
+  } catch (error) {
+    console.log("error \n", error);
+    redirect("/login?del_cookies=1")
   }
 
   //fetch 2. -> data for description
-  const retireDataObj = await fetchData(RETIRE_DESCRIPTION);
-  if (!retireDataObj) redirect("/user");
+  var retireDataObj = null;
+  try {
+    retireDataObj = await fetchData(RETIRE_DESCRIPTION);
+    if (!retireDataObj) throw new Error("fetch error");
+  } catch (error) {
+    console.log("error \n", error);
+    redirect("/user")
+  }
+ 
 
-  //fetch 3. -> data for all client's average
-  const avgDataObj = await fetchData(RETIRE_AVG_DATA);
-  if (!avgDataObj) redirect("/user");
+  // //fetch 3. -> data for all client's average
+  var avgDataObj = null;
+  try {
+    avgDataObj = await fetchData(RETIRE_AVG_DATA);
+    if (!avgDataObj) throw new Error("fetch error");
+  } catch (error) {
+    console.log("error \n", error);
+    redirect("/user")
+  }
 
   return (
     <main className={`page_body`}>

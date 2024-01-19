@@ -43,6 +43,11 @@ export function middleware(request) {
       break;
 
     case request.nextUrl.pathname.startsWith("/login"):
+      if (request.nextUrl.searchParams.get("del_cookies") == 1) {
+        console.log("del cookies");
+        break;
+      }
+
       if (udnmember && udnland && udngold && um2) {
         return NextResponse.redirect(new URL("/member/user", request.url));
       }
@@ -51,10 +56,10 @@ export function middleware(request) {
     case pathnameNeedMemberCookies:
       if (!udnmember || !udnland || !udngold || !um2) {
         //
-        request.cookies.delete("udnmember");
-        request.cookies.delete("udnland");
-        request.cookies.delete("udngold");
-        request.cookies.delete("um2");
+        // request.cookies.delete("udnmember");
+        // request.cookies.delete("udnland");
+        // request.cookies.delete("udngold");
+        // request.cookies.delete("um2");   //僅刪除此次 request 的 cookies，不會刪除瀏覽器的cookies
 
         //
         const parsedUrl = new URL(request.url);
@@ -64,7 +69,7 @@ export function middleware(request) {
         const redirectQuery = encodeURIComponent(pathname + hash + search);
 
         return NextResponse.redirect(
-          new URL(`/member/login?redirect=${redirectQuery}`, request.url)
+          new URL(`/member/login?redirect=${redirectQuery}&del_cookies=1`, request.url)
         );
       }
       break;

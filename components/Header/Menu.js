@@ -18,11 +18,6 @@ export default function Menu() {
   };
 
   //
-  useEffect(() => {
-    console.log("isMemberOpen", isMemberOpen);
-  }, [isMemberOpen]);
-
-  //
   return (
     <section className={classes.menu}>
       <div className={classes.member__container}>

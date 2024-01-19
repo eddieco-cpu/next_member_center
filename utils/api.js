@@ -102,7 +102,7 @@ export const MEMBER_TEACHIFY = "/api/member/teachify";
 
 //
 export const RETIRE_CLIENT_DATA = `${HEALTH_ROOT}/api/retire`;
-export const RETIRE_DESCRIPTION = `${HEALTH_ROOT}/retire.json`;
+export const RETIRE_DESCRIPTION = `https://health.udn.com/retire.json`;
 export const RETIRE_AVG_DATA = `${HEALTH_ROOT}/api/retire/data`;
 
 //
