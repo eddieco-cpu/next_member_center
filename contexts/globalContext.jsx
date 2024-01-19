@@ -7,33 +7,39 @@ const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   //
-	const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-	const forcedLogout = () => {
-    alert("登出");
-    cookies.remove("um2", 
-    //{ path: "/", domain: ".udn.com" }
+  const forcedLogout = () => {
+    cookies.remove(
+      "um2"
+      //{ path: "/", domain: ".udn.com" }
     );
-    cookies.remove("udnmember", 
-    //{ path: "/", domain: ".udn.com" }
+    cookies.remove(
+      "udnmember"
+      //{ path: "/", domain: ".udn.com" }
     );
     localStorage.removeItem("teachify_token");
     localStorage.removeItem("teachify_user");
-    cookies.remove("udngold", 
-    //{ path: "/", domain: ".udn.com" }
+    cookies.remove(
+      "udngold"
+      //{ path: "/", domain: ".udn.com" }
     );
-    cookies.remove("udnland", 
-    //{ path: "/", domain: ".udn.com" }
+    cookies.remove(
+      "udnland"
+      //{ path: "/", domain: ".udn.com" }
     );
-    cookies.remove("udnavatar", 
-    //{ path: "/", domain: ".udn.com" }
+    cookies.remove(
+      "udnavatar"
+      //{ path: "/", domain: ".udn.com" }
     );
-    cookies.remove("udnnick", 
-    //{ path: "/", domain: ".udn.com" }
+    cookies.remove(
+      "udnnick"
+      //{ path: "/", domain: ".udn.com" }
     );
     cookies.remove("udnsession");
-    cookies.remove("snsmember", 
-    //{ domain: ".udn.com" }
+    cookies.remove(
+      "snsmember"
+      //{ domain: ".udn.com" }
     );
     cookies.remove("fg_avatar", { domain: ".udn.com" });
     cookies.remove("fg_cassync", { domain: ".udn.com" });
@@ -44,22 +50,21 @@ const GlobalProvider = ({ children }) => {
   };
   const logout = () => {
     return new Promise((resolve) => {
-			HealthModal.confirm({
-				title: "",
-				text: "確認登出嗎？",
-				callback: () => {
-					forcedLogout();
-					resolve(true)
-				},
+      HealthModal.confirm({
+        title: "",
+        text: "確認登出嗎？",
+        callback: () => {
+          forcedLogout();
+          resolve(true);
+        },
         cancelCallback: () => {
           //alert("取消登出");
-          resolve(false)
-        }
-			});
-		});
+          resolve(false);
+        },
+      });
+    });
   };
 
-  
   return (
     <>
       <GlobalContext.Provider

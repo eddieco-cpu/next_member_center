@@ -13,13 +13,6 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
   const { logout } = useContext(GlobalContext);
   const router = useRouter();
 
-  const [hasLogin] = useState(
-    cookies.get("udnmember") &&
-      cookies.get("udnland") &&
-      cookies.get("udngold") &&
-      cookies.get("um2")
-  );
-
   /**
    * While rendering your application, there was a difference between the React tree
    * that was pre-rendered from the server and the React tree that was rendered
@@ -30,16 +23,18 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
    * to prevent a hydration mismatch
    */
   const [isClient, setIsClient] = useState(false); //https://nextjs.org/docs/messages/react-hydration-error
-  
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  async function handleLogout (e) {
+  async function handleLogout(e) {
     e.preventDefault();
     const isDidLogout = await logout();
+    if (isDidLogout) {
+      router.push("/login?action=login");
+    }
     setIsMemberOpen(false);
-    router.push("/login?action=login");
   }
 
   //
@@ -52,7 +47,10 @@ export default function UserDropdown({ isMemberOpen, setIsMemberOpen }) {
           isMemberOpen ? classes.show : ""
         }`}
       >
-        {hasLogin ? (
+        {cookies.get("udnmember") &&
+        cookies.get("udnland") &&
+        cookies.get("udngold") &&
+        cookies.get("um2") ? (
           <div className={`${classes["member__wrapper--login"]}`}>
             <Link
               className={`${classes["member__wrapper-items"]}`}

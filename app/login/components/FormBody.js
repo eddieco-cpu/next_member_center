@@ -1,15 +1,32 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useContext } from "react";
 import classes from "../page.module.scss";
 
+import { GlobalContext } from "@contexts/globalContext";
 import FormLogin from "./FormLogin";
 import FormRegister from "./FormRegister";
 
 export default function Form() {
   //
+  const { forcedLogout } = useContext(GlobalContext);
+  const router = useRouter();
   const params = useSearchParams();
-  console.log("params", params.get("action"));
+
+  useEffect(() => {
+    //
+    if (!params.has("del_cookies") || params.get("del_cookies") != 1) return;
+
+    // if params has del_cookies=1, delete cookies
+    forcedLogout();
+
+    var newParams = {};
+    for (const [key, value] of params.entries()) {
+      if (key !== "del_cookies") newParams[key] = value;
+    }
+    router.push("/login?" + new URLSearchParams(newParams).toString());
+  }, []);
 
   // params.forEach((value, key) => {
   //   console.log(" params ==>", key, value);  //取得所有參數

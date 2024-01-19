@@ -44,10 +44,8 @@ export function middleware(request) {
 
     case request.nextUrl.pathname.startsWith("/login"):
       if (request.nextUrl.searchParams.get("del_cookies") == 1) {
-        console.log("del cookies");
-        break;
+        break; // if del_cookies=1, then no redirect & delete cookies in login page
       }
-
       if (udnmember && udnland && udngold && um2) {
         return NextResponse.redirect(new URL("/member/user", request.url));
       }
@@ -69,7 +67,10 @@ export function middleware(request) {
         const redirectQuery = encodeURIComponent(pathname + hash + search);
 
         return NextResponse.redirect(
-          new URL(`/member/login?redirect=${redirectQuery}&del_cookies=1`, request.url)
+          new URL(
+            `/member/login?redirect=${redirectQuery}&del_cookies=1`,
+            request.url
+          )
         );
       }
       break;
