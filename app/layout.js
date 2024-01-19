@@ -1,5 +1,6 @@
 import Header from "@components/Header";
 import Footer from "@components/Footer";
+import Loading from "@/components/Loading";
 import ReCaptcha from "@/components/ReCaptcha";
 import GraphqlProvider from "@/components/GraphqlProvider";
 import GlobalProvider from "@/contexts/globalContext";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }) {
         <GlobalProvider>
           <Header />
           <GraphqlProvider>{children}</GraphqlProvider>
+          <Loading />
         </GlobalProvider>
         <Footer />
         <ReCaptcha />
