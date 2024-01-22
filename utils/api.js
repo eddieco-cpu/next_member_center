@@ -110,4 +110,6 @@ export const TRACK_STATE = `${HEALTH_ROOT}/api/track/list`;
 export const TRACK_EXPERT = `/api/track/expert`;
 
 //
-export const NOTIFICATION_LIST = "/api/notification/list?limit=10&page=1&timestamp=&channel_id=1005"
+export const NOTIFICATION_LIST =
+  "/api/notification/list?limit=10&page=1&timestamp=&channel_id=1005";
+export const NOTIFICATION_READ = "/api/notification/read";

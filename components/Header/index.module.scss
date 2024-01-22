@@ -470,14 +470,14 @@
     cursor: pointer;
 
     &:hover {
-      background-color: darken($color: white, $amount: 0.05); //${darken(white, 0.05)};
+      background-color: #f3f3f3 //darken($color: white, $amount: 0.05); //${darken(white, 0.05)};
     }
 
     &.unread {
       background-color: var(--green-0);
 
       &:hover {
-        background-color: darken($color: $green-0, $amount: 0.05); //${darken(green0, 0.05)};
+        background-color: darken($color: $green-0, $amount: 5); //${darken(green0, 0.05)};
       }
     }
 
@@ -537,7 +537,7 @@
 
     &__wrapper {
       position: absolute;
-      z-index: 1;
+      z-index: 4;
       top: 35px;
       right: 0;
       background-color: var(--white);
@@ -550,9 +550,24 @@
       transform-origin: top right;
       transition: transform 0.2s cubic-bezier(0.5, -0.1, 0.2, 1);
 
+      &--bg {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        //background-color: rgba(0, 0, 0, 0.05);
+        z-index: 3;
+      }
+
       &.show {
         transform: scale(1);
         transition-timing-function: cubic-bezier(0, -0.5, 0, 1.5);
+
+        &+.notification__wrapper--bg {
+          display: block;
+        }
       }
 
       @include pad {
@@ -572,4 +587,12 @@
       }
     }
   }
+}
+
+.notification-btn,
+.member-btn,
+.nav-menu {
+  //outline: 3px solid orangered !important;
+  position: relative;
+  z-index: 4;
 }

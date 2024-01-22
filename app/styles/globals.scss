@@ -81,6 +81,10 @@ button {
     top: -100vh;
     transition: all .4s ease-in;
   }
+
+  .search-menu--block {
+    z-index: 5;
+  }
 }
 
 .page_title {

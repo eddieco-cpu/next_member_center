@@ -8,6 +8,7 @@
       "@styles/*": ["./app/styles/*"],
 
       "@track/*": ["./app/track/*"],
+      "@user/*": ["./app/user/*"],
     }
   }
 }

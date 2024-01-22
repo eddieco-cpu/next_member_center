@@ -1,7 +1,12 @@
 "use client";
 import cookies from "js-cookie";
 import { useState, createContext } from "react";
-import { getData, NOTIFICATION_LIST } from "@utils/api";
+import {
+  postData,
+  getData,
+  NOTIFICATION_LIST,
+  NOTIFICATION_READ,
+} from "@utils/api";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
 const GlobalContext = createContext();
@@ -9,7 +14,7 @@ const GlobalContext = createContext();
 const GlobalProvider = ({ children }) => {
   //
   const [isLoading, setIsLoading] = useState(false);
-  const [notificationData, setNotificationData] = useState({})
+  const [notificationData, setNotificationData] = useState({});
 
   const forcedLogout = () => {
     cookies.remove(
@@ -69,22 +74,41 @@ const GlobalProvider = ({ children }) => {
   };
 
   const getNotification = async () => {
-    console.log('getNotification')
-    const { data } = await getData(BASE_PATH + NOTIFICATION_LIST, { auth: true })
-    console.log('notificationData', data)
-    setNotificationData(data)
+    console.log("getNotification");
+    const { data } = await getData(BASE_PATH + NOTIFICATION_LIST, {
+      auth: true,
+    });
+    console.log("notificationData", data);
+    setNotificationData(data);
     // try {
     //   setNotificationData(data)
     // } catch (error) {
     //   setNotificationData({})
     // }
-  }
+  };
 
+  const readNotification = async (id) => {
+    //
+    let { data } = await postData(BASE_PATH + NOTIFICATION_READ, {
+      channel_id: 1005,
+      id: id,
+    });
+
+    return data;
+  };
 
   return (
     <>
       <GlobalContext.Provider
-        value={{ logout, forcedLogout, isLoading, setIsLoading, getNotification, notificationData }}
+        value={{
+          logout,
+          forcedLogout,
+          isLoading,
+          setIsLoading,
+          getNotification,
+          notificationData,
+          readNotification,
+        }}
       >
         {children}
       </GlobalContext.Provider>
