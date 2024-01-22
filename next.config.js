@@ -48,6 +48,10 @@ const nextConfig = {
         source: "/api/collect/switch",
         destination: "https://interactive.udn.com/api/collect/switch",
       },
+      {
+        source: "/api/notification/:path*",
+        destination: "https://interactive.udn.com/api/notification/:path*",
+      },
     ];
   },
 };

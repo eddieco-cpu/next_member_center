@@ -1,13 +1,15 @@
 "use client";
 import cookies from "js-cookie";
 import { useState, createContext } from "react";
+import { getData, NOTIFICATION_LIST } from "@utils/api";
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 
-//
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   //
   const [isLoading, setIsLoading] = useState(false);
+  const [notificationData, setNotificationData] = useState({})
 
   const forcedLogout = () => {
     cookies.remove(
@@ -66,10 +68,23 @@ const GlobalProvider = ({ children }) => {
     });
   };
 
+  const getNotification = async () => {
+    console.log('getNotification')
+    const { data } = await getData(BASE_PATH + NOTIFICATION_LIST, { auth: true })
+    console.log('notificationData', data)
+    setNotificationData(data)
+    // try {
+    //   setNotificationData(data)
+    // } catch (error) {
+    //   setNotificationData({})
+    // }
+  }
+
+
   return (
     <>
       <GlobalContext.Provider
-        value={{ logout, forcedLogout, isLoading, setIsLoading }}
+        value={{ logout, forcedLogout, isLoading, setIsLoading, getNotification, notificationData }}
       >
         {children}
       </GlobalContext.Provider>
