@@ -52,6 +52,10 @@ const nextConfig = {
         source: "/api/notification/:path*",
         destination: "https://interactive.udn.com/api/notification/:path*",
       },
+      {
+        source: "/wbs/:path*",
+        destination: "https://umapi.udn.com/member/wbs/:path*",
+      },
     ];
   },
 };

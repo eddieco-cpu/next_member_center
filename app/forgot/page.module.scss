@@ -1,0 +1,76 @@
+@import "@styles/_mixin";
+@import "@styles/_var";
+
+.forgot {
+  &__wrapper {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    .forgot__button {
+      margin: 0 15px;
+      width: calc(100% - 30px);
+
+      @include mobile {
+        margin: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  &__span {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  &__input {
+    input {
+      outline: none;
+      border: 0px;
+    }
+
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @include mobile {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      height: 35px;
+      border-bottom: 1px solid var(--grey-100);
+      transition: border-bottom-color 0.15s ease;
+
+      &:focus {
+        border-bottom-color: var(--black);
+      }
+
+      &:focus+span,
+      &:not(:focus):valid+span {
+        transform: translate(0, -300%);
+        color: var(--grey-200);
+        font-size: 13px;
+      }
+    }
+
+    span {
+      position: absolute;
+      transform: translate(0, -150%);
+      color: var(--grey-100);
+      transition: all 0.1s ease-out;
+      pointer-events: none;
+      will-change: transform, font-size;
+    }
+  }
+}

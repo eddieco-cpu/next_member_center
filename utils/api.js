@@ -113,3 +113,7 @@ export const TRACK_EXPERT = `/api/track/expert`;
 export const NOTIFICATION_LIST =
   "/api/notification/list?limit=10&page=1&timestamp=&channel_id=1005";
 export const NOTIFICATION_READ = "/api/notification/read";
+
+//
+export const PHONE_RES_PWD = "/wbs/MemberMobileResPwd";
+export const EMAIL_RES_PWD = "/wbs/MemberEmailResPwd";
