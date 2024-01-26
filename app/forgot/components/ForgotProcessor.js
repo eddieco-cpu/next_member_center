@@ -18,8 +18,8 @@ export default function ForgotProcessor() {
   //
   const router = useRouter();
 
-  const { setIsLoading } = useContext(GlobalContext);
-  const [forgot, setForgot] = useState("");
+  const { setIsLoading, setVerifyData } = useContext(GlobalContext);
+  const [forgot, setForgot] = useState(""); // email or mobile
 
   const forgotBtn = async () => {
     //
@@ -96,14 +96,15 @@ export default function ForgotProcessor() {
     //
     if (data.status === "200") {
       //
-      // let newVerifyData = {
-      //   mobile,
-      //   resndpwdno: data.resndpwdno,
-      // };
-      // setVerifyData((preVerifyData) => ({  // useContext in original code, & to be continued
-      //   ...preVerifyData,
-      //   ...newVerifyData,
-      // }));
+      let newVerifyData = {
+        mobile, // user inputed mobile number,
+        resndpwdno: data.resndpwdno,
+      };
+
+      setVerifyData((preVerifyData) => ({
+        ...preVerifyData,
+        ...newVerifyData,
+      }));
 
       HealthModal.alert({
         title: "用戶中心",

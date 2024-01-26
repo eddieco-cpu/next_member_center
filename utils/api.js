@@ -117,3 +117,6 @@ export const NOTIFICATION_READ = "/api/notification/read";
 //
 export const PHONE_RES_PWD = "/wbs/MemberMobileResPwd";
 export const EMAIL_RES_PWD = "/wbs/MemberEmailResPwd";
+export const PHONE_RESEND = "/wbs/MemberMobileResPwd";
+export const PHONE_CODE_RESEND = "/wbs/MemberMobileResPwd";
+export const PHONE_CHG_PWD = "/wbs/MemberMobileChangePwd";

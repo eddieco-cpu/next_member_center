@@ -16,6 +16,7 @@ const GlobalProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [notificationData, setNotificationData] = useState({});
 
+  //
   const forcedLogout = () => {
     cookies.remove(
       "um2"
@@ -73,6 +74,7 @@ const GlobalProvider = ({ children }) => {
     });
   };
 
+  //
   const getNotification = async () => {
     console.log("getNotification");
     const { data } = await getData(BASE_PATH + NOTIFICATION_LIST, {
@@ -86,7 +88,6 @@ const GlobalProvider = ({ children }) => {
     //   setNotificationData({})
     // }
   };
-
   const readNotification = async (id) => {
     //
     let { data } = await postData(BASE_PATH + NOTIFICATION_READ, {
@@ -97,17 +98,31 @@ const GlobalProvider = ({ children }) => {
     return data;
   };
 
+  //
+  const [verifyData, setVerifyData] = useState({
+    phone: "",
+    email: "",
+    source: "",
+    uid: "",
+    isBusiness: false,
+  });
+
   return (
     <>
       <GlobalContext.Provider
         value={{
           logout,
           forcedLogout,
+
           isLoading,
           setIsLoading,
+
           getNotification,
           notificationData,
           readNotification,
+
+          verifyData,
+          setVerifyData,
         }}
       >
         {children}
