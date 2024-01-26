@@ -13,7 +13,7 @@ export async function resendCode(
   const g_token = await getRecaptcha();
   const formData = {
     site: "health",
-    mobile: mobile || "0977733401",
+    mobile,
     g_token,
   };
 

@@ -61,10 +61,11 @@ export default function ForgotMobile() {
 
     if (data.status === "200") {
       //
-      var newParams = {};
+      const newParams = {};
       for (const [key, value] of params.entries()) {
         if (key !== "type") newParams[key] = value;
       }
+      newParams.del_cookies = 1;
 
       HealthModal.alert({
         title: "重設密碼",

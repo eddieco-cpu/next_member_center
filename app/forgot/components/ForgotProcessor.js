@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { Btn } from "@components/ui/Layout";
 import { GlobalContext } from "@contexts/globalContext";
@@ -17,6 +17,7 @@ import classes from "../page.module.scss";
 export default function ForgotProcessor() {
   //
   const router = useRouter();
+  const params = useSearchParams();
 
   const { setIsLoading, setVerifyData } = useContext(GlobalContext);
   const [forgot, setForgot] = useState(""); // email or mobile
@@ -69,11 +70,18 @@ export default function ForgotProcessor() {
     const { data } = await postForm(basePath + EMAIL_RES_PWD, formData);
 
     if (data.status === "200") {
+      const newParams = {};
+      for (const [key, value] of params.entries()) {
+        newParams[key] = value;
+      }
+      newParams.action = "login";
+      newParams.del_cookies = 1;
+
       HealthModal.alert({
         title: "用戶中心",
         text: "請至註冊的電子信箱中開啟[重設密碼通知函]",
         callback() {
-          router.push("/login?action=login");
+          router.push("/login?" + new URLSearchParams(newParams).toString());
         },
       });
     } else {
@@ -106,14 +114,17 @@ export default function ForgotProcessor() {
         ...newVerifyData,
       }));
 
+      const newParams = {};
+      for (const [key, value] of params.entries()) {
+        newParams[key] = value;
+      }
+      newParams.type = "forgotMobile";
+
       HealthModal.alert({
         title: "用戶中心",
         text: "已發送認證碼至您的手機號碼",
         callback() {
-          navigate({
-            pathname: "/verify",
-            search: "type=forgotMobile",
-          });
+          router.push("/verify?" + new URLSearchParams(newParams).toString());
         },
       });
 
