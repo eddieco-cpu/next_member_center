@@ -5,7 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { parse, stringify } from "querystring";
 import cookies from "js-cookie";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalContext } from "@contexts/globalContext";
+
 import classes from "../page.module.scss";
 
 import { Btn, CheckboxInput, TextInput } from "@components/ui/Layout";
@@ -36,9 +38,11 @@ const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH;
 //
 export default function FormLogin() {
   //
+  const { setVerifyData } = useContext(GlobalContext);
+
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
+  const params = useSearchParams();
+  const redirect = params.get("redirect");
 
   //
   const [isComponentLoading, setIsComponentLoading] = useState(false);
@@ -344,19 +348,21 @@ export default function FormLogin() {
               return; //setIsLoading(false)
             }
 
-            // let newVerifyData = {      //// Verify again
-            //   mobile: formData.mobile
-            // }
-            // setVerifyData((preVerifyData) => ({
-            //   ...preVerifyData,
-            //   ...newVerifyData
-            // }))
+            let newVerifyData = {
+              //// Verify again
+              mobile: formData.mobile,
+            };
+            setVerifyData((preVerifyData) => ({
+              ...preVerifyData,
+              ...newVerifyData,
+            }));
 
-            // const searchPara = { ...parse(search), type: 'sms' }
-            // navigate({
-            //   pathname: '/verify',
-            //   search: `?${stringify(searchPara)}`
-            // })
+            const newParams = {};
+            for (const [key, value] of params.entries()) {
+              newParams[key] = value;
+            }
+            newParams.type = "sms";
+            router.push("/verify?" + new URLSearchParams(newParams).toString());
           },
         });
         return; //setIsLoading(false);

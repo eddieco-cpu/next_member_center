@@ -6,6 +6,7 @@ import PageDevName from "@components/ui/PageDevName";
 import classes from "./page.module.scss";
 
 import ForgotMobile from "./components/ForgotMobile";
+import SMS from "./components/SMS";
 
 export default function Page({ searchParams: { type = "resend" } }) {
   //
@@ -23,7 +24,7 @@ export default function Page({ searchParams: { type = "resend" } }) {
       break;
     case "sms":
       title = "手機簡訊認證";
-      child = null; //renderComponent(SMS);
+      child = <SMS />; //renderComponent(SMS);
       break;
     case "forgotMobile":
       title = "重設密碼";
