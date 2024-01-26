@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useContext } from "react";
+import cookies from "js-cookie";
 import classes from "../page.module.scss";
 
 import { GlobalContext } from "@contexts/globalContext";
@@ -15,18 +16,26 @@ export default function Form() {
   const params = useSearchParams();
 
   useEffect(() => {
+    console.log("@@@ params check @@@");
     //
     if (!params.has("del_cookies") || params.get("del_cookies") != 1) return;
 
     // if params has del_cookies=1, delete cookies
-    forcedLogout();
+    if (
+      cookies.get("udnmember") ||
+      cookies.get("udnland") ||
+      cookies.get("udngold") ||
+      cookies.get("um2")
+    ) {
+      forcedLogout();
+    }
 
     var newParams = {};
     for (const [key, value] of params.entries()) {
       if (key !== "del_cookies") newParams[key] = value;
     }
-    router.push("/login?" + new URLSearchParams(newParams).toString());
-  }, []);
+    router.replace("/login?" + new URLSearchParams(newParams).toString());
+  }, [params]);
 
   // params.forEach((value, key) => {
   //   console.log(" params ==>", key, value);  //取得所有參數
