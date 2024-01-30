@@ -1,4 +1,5 @@
 import { getData, FOOTER } from "@utils/api";
+import ToFaqLinker from "./ToFaqLinker";
 
 export default async function Footer() {
   let data = null;
@@ -18,6 +19,7 @@ export default async function Footer() {
 
   return (
     <>
+      <ToFaqLinker />
       {data ? (
         <div
           dangerouslySetInnerHTML={{ __html: data.footer }}

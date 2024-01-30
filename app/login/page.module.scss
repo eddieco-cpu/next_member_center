@@ -17,6 +17,15 @@
       &__container {
         width: 90%;
         max-width: 500px;
+        min-height: calc(100vh - 90px - 90px - 402px);
+
+        @include pad {
+          min-height: calc(100vh - 90px - 402px);
+        }
+
+        @include mobile {
+          min-height: calc(100vh - 60px - 362px);
+        }
       }
 
       &__header {

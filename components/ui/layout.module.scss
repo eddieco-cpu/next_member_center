@@ -30,7 +30,7 @@
 }
 
 .container {
-  min-height: calc(100vh - 90px - 90px - 362px);
+  min-height: calc(100vh - 90px - 90px - 362px - 125px);
   max-width: 1280px;
   width: 90%;
   margin: 0 auto 40px;
@@ -40,11 +40,11 @@
   }
 
   @include pad {
-    min-height: calc(100vh - 90px - 362px);
+    min-height: calc(100vh - 90px - 362px - 125px);
   }
 
   @include mobile {
-    min-height: calc(100vh - 60px - 362px);
+    min-height: calc(100vh - 60px - 362px - 125px - 20px);
   }
 }
 
