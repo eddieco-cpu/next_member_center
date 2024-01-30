@@ -7,6 +7,9 @@ import classes from "./page.module.scss";
 
 import ForgotMobile from "./components/ForgotMobile";
 import SMS from "./components/SMS";
+import EmailResend from "./components/EmailResend";
+import EmailVerify from "./components/EmailVerify";
+import Bind from "./components/Bind";
 
 export default function Page({ searchParams: { type = "resend" } }) {
   //
@@ -16,11 +19,11 @@ export default function Page({ searchParams: { type = "resend" } }) {
   switch (type) {
     case "bind":
       title = "第三方登入註冊";
-      child = null; //renderComponent(Bind);
+      child = <Bind />; //renderComponent(Bind);
       break;
     case "email":
       title = "電子信箱認證";
-      child = null; //renderComponent(EmailVerify);
+      child = <EmailVerify />; //renderComponent(EmailVerify);
       break;
     case "sms":
       title = "手機簡訊認證";
@@ -32,7 +35,7 @@ export default function Page({ searchParams: { type = "resend" } }) {
       break;
     case "resend":
       title = "重寄啟用信";
-      child = null; //renderComponent(EmailResend);
+      child = <EmailResend />; //renderComponent(EmailResend);
       break;
     default:
       break;

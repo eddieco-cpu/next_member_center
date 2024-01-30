@@ -420,8 +420,8 @@ export default function FormLogin() {
           <label htmlFor="rememberAccount">記住我的帳號</label>
         </CheckboxInput>
         <div className={classes["login__setting--right"]}>
-          <Link href="/order">忘記密碼</Link>
-          <Link href="/orders">重寄啟用信</Link>
+          <Link href="/forgot">忘記密碼</Link>
+          <Link href="/verify?type=resend">重寄啟用信</Link>
         </div>
       </div>
       <div className={classes.login__button__wrapper}>

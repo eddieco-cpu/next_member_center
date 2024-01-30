@@ -121,3 +121,4 @@ export const PHONE_RESEND = "/wbs/MemberMobileResPwd";
 export const PHONE_CODE_RESEND = "/wbs/MemberMobileResPwd";
 export const PHONE_CHG_PWD = "/wbs/MemberMobileChangePwd";
 export const PHONE_ACTIVE = "/wbs/MemberMobileActive";
+export const EMAIL_RESEND = "/wbs/MemberEmailSendConfirm";
